@@ -1,0 +1,53 @@
+@if (item) {
+  <div class="checkout-page">
+    <div class="main-column">
+      <h1>Select a payment method</h1>
+      <p class="secure-note">
+        <mat-icon>lock</mat-icon>
+        Fast and secure booking
+      </p>
+
+      <div class="payment-method-selector">
+        <mat-icon>credit_card</mat-icon>
+      </div>
+
+      <form class="payment-form" [formGroup]="form" (ngSubmit)="payNow()">
+        <label>
+          Card number
+          <input type="text" formControlName="cardNumber" placeholder="9999 8888 7777 6666" />
+        </label>
+
+        <div class="brand-row">
+          <span class="brand visa">VISA</span>
+          <span class="brand mastercard">Mastercard</span>
+          <span class="brand amex">AMEX</span>
+          <span class="brand jcb">JCB</span>
+          <span class="brand discover">Discover</span>
+        </div>
+
+        <div class="form-row">
+          <label>
+            Expiry date (MM/YY)
+            <input type="text" formControlName="expiry" placeholder="05/34" />
+          </label>
+          <label>
+            CVV
+            <input type="text" formControlName="cvv" placeholder="123" />
+          </label>
+        </div>
+
+        <label>
+          Cardholder name
+          <input type="text" formControlName="cardHolder" placeholder="First Last" />
+        </label>
+
+        <button type="submit" class="btn-pay" [disabled]="form.invalid">
+          <mat-icon>lock</mat-icon>
+          Pay now
+        </button>
+      </form>
+    </div>
+
+    <app-checkout-summary [item]="item"></app-checkout-summary>
+  </div>
+}

@@ -1,0 +1,84 @@
+@use '../../../../styles/variables' as *;
+
+.trip-item-card {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 16px;
+  background-color: $color-white;
+  border: 1px solid $color-soft-gray;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.thumb {
+  grid-row: 1 / 3;
+  width: 110px;
+  height: 110px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.details {
+  .title {
+    margin: 0 0 6px 0;
+    font-family: $font-family-primary;
+    font-weight: $font-weight-h2;
+    color: $color-navy-blue;
+  }
+
+  .meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0 0 4px 0;
+    font-family: $font-family-secondary;
+    color: $color-navy-blue;
+
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+      color: $color-soft-gray;
+    }
+  }
+}
+
+.footer {
+  grid-column: 1 / 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid $color-light-beige;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.price {
+  font-family: $font-family-primary;
+  font-weight: $font-weight-h2;
+  color: $color-navy-blue;
+}
+
+@media (max-width: 500px) {
+  .trip-item-card {
+    grid-template-columns: 80px 1fr;
+  }
+
+  .thumb {
+    width: 80px;
+    height: 80px;
+  }
+
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}

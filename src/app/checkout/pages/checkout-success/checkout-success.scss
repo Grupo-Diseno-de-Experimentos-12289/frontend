@@ -1,0 +1,41 @@
+@use '../../../../styles/variables' as *;
+
+.success-page {
+  max-width: 600px;
+  margin: 40px auto;
+  text-align: center;
+
+  h1 {
+    margin-bottom: 24px;
+  }
+
+  p {
+    font-family: $font-family-secondary;
+    color: $color-navy-blue;
+    line-height: 1.6;
+  }
+}
+
+.success-icon {
+  color: #2e7d32;
+  font-size: 96px;
+  width: 96px;
+  height: 96px;
+  margin: 32px 0;
+}
+
+.btn-home {
+  background-color: $color-navy-blue;
+  color: $color-white;
+  border: none;
+  border-radius: 50px;
+  padding: 14px 32px;
+  font-family: $font-family-primary;
+  font-weight: $font-weight-h2;
+  font-size: $font-size-body;
+  cursor: pointer;
+
+  &:hover {
+    background-color: lighten(#1c1f2b, 10%);
+  }
+}

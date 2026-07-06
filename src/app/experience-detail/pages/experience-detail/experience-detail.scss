@@ -1,0 +1,329 @@
+@use '../../../../styles/variables' as *;
+
+.loading {
+  font-family: $font-family-secondary;
+  color: $color-soft-gray;
+  text-align: center;
+  padding: 40px;
+}
+
+.experience-page {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.experience-header {
+  .title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h1 {
+      margin: 0;
+    }
+  }
+}
+
+.favorite-btn {
+  background-color: $color-navy-blue;
+  border-radius: 12px;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .favorite-icon {
+    color: $color-white;
+    transition: color 0.2s ease-in-out;
+  }
+
+  &:hover .favorite-icon {
+    color: $color-sand-yellow;
+  }
+}
+
+.hero-image {
+  width: 100%;
+  margin: 16px 0;
+  border-radius: 12px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    max-height: 420px;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 32px;
+  align-items: start;
+}
+
+.description {
+  font-family: $font-family-secondary;
+  line-height: 1.6;
+  color: $color-navy-blue;
+}
+
+.info-section {
+  margin: 1.5rem 0;
+
+  .info-item {
+    margin-bottom: 14px;
+
+    strong {
+      display: block;
+      font-family: $font-family-primary;
+      color: $color-navy-blue;
+      margin-bottom: 2px;
+    }
+
+    p {
+      margin: 0;
+      font-family: $font-family-secondary;
+      color: $color-soft-gray;
+    }
+  }
+}
+
+.reviews-section {
+  margin: 1.5rem 0;
+}
+
+.price-box {
+  position: sticky;
+  top: 20px;
+  background-color: $color-white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  text-align: center;
+
+  .price-from {
+    font-family: $font-family-primary;
+    font-weight: $font-weight-h2;
+    color: $color-navy-blue;
+    margin-bottom: 12px;
+  }
+}
+
+.btn-cta {
+  background-color: $color-sand-yellow;
+  color: $color-navy-blue;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 24px;
+  font-family: $font-family-primary;
+  font-weight: $font-weight-h2;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken($color-sand-yellow, 8%);
+  }
+
+  &.full {
+    width: 100%;
+  }
+}
+
+.booking-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  background-color: $color-white;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin: 2rem 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.selector-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid $color-soft-gray;
+  border-radius: 50px;
+  padding: 8px 16px;
+  font-family: $font-family-secondary;
+  color: $color-navy-blue;
+
+  mat-icon {
+    color: $color-soft-gray;
+  }
+
+  input {
+    border: none;
+    font-family: $font-family-secondary;
+    font-size: $font-size-body;
+    color: $color-navy-blue;
+    width: 130px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  input[type='number'] {
+    width: 40px;
+  }
+}
+
+.booking-card {
+  background-color: $color-white;
+  border: 2px solid $color-light-blue;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 2rem;
+
+  h3 {
+    margin: 0 0 12px 0;
+    font-family: $font-family-primary;
+    color: $color-navy-blue;
+  }
+
+  .meeting-point {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: $color-light-blue;
+    font-family: $font-family-secondary;
+    margin-bottom: 16px;
+
+    mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+.booking-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid $color-soft-gray;
+  font-family: $font-family-secondary;
+  color: $color-navy-blue;
+
+  mat-icon {
+    color: $color-navy-blue;
+  }
+
+  p {
+    margin: 4px 0 0 0;
+  }
+}
+
+.booking-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background-color: $color-light-beige;
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 12px;
+
+  .total {
+    display: flex;
+    flex-direction: column;
+
+    .total-label {
+      font-family: $font-family-secondary;
+      color: $color-soft-gray;
+      font-size: $font-size-caption;
+    }
+
+    .total-value {
+      font-family: $font-family-primary;
+      font-weight: 700;
+      font-size: 22px;
+      color: $color-navy-blue;
+    }
+  }
+}
+
+.booking-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid $color-light-blue;
+  color: $color-light-blue;
+  border-radius: 50px;
+  padding: 10px 20px;
+  font-family: $font-family-primary;
+  font-weight: $font-weight-h2;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba($color-light-blue, 0.08);
+  }
+}
+
+.btn-filled {
+  background-color: $color-light-blue;
+  border: none;
+  color: $color-white;
+  border-radius: 50px;
+  padding: 10px 20px;
+  font-family: $font-family-primary;
+  font-weight: $font-weight-h2;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken($color-light-blue, 8%);
+  }
+}
+
+.added-message {
+  margin: 12px 0 0 0;
+  color: $color-light-blue;
+  font-family: $font-family-secondary;
+  font-weight: $font-weight-h2;
+}
+
+.link-button {
+  display: inline-block;
+  margin-top: 16px;
+  background: none;
+  border: none;
+  color: $color-light-blue;
+  font-family: $font-family-secondary;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+}
+
+.suggestions {
+  margin: 2rem 0;
+}
+
+.suggestions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 900px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .price-box {
+    position: static;
+  }
+
+  .suggestions-grid {
+    grid-template-columns: 1fr;
+  }
+}

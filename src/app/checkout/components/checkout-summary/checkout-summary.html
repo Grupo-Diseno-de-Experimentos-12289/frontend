@@ -1,0 +1,42 @@
+<aside class="checkout-summary">
+  <h2>Summary</h2>
+
+  <div class="summary-card">
+    <div class="summary-header">
+      <img [src]="item.imageUrl" [alt]="item.title" />
+      <h3>{{ item.title }}</h3>
+    </div>
+
+    <div class="summary-row">
+      <mat-icon>schedule</mat-icon>
+      <span>{{ formattedDate }}</span>
+    </div>
+
+    <div class="summary-row">
+      <mat-icon>group</mat-icon>
+      <span>{{ item.adults }} {{ item.adults === 1 ? 'adult' : 'adults' }}</span>
+    </div>
+
+    <div class="summary-row">
+      <mat-icon>edit</mat-icon>
+      <a class="edit-link" (click)="editTrip()">Edit trip</a>
+    </div>
+
+    <div class="summary-divider"></div>
+
+    <div class="summary-row">
+      <mat-icon class="ok-icon">check_circle</mat-icon>
+      <span>Refund option</span>
+    </div>
+
+    <div class="summary-row">
+      <mat-icon class="ok-icon">thumb_up</mat-icon>
+      <span>Great value</span>
+    </div>
+
+    <div class="summary-total">
+      <span>Total</span>
+      <strong>{{ total.toFixed(2) }} PEN</strong>
+    </div>
+  </div>
+</aside>

@@ -1,0 +1,53 @@
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>Find your next unforgettable experience</h1>
+    <a class="hero-link" href="#experiencias-destacadas">Learn more</a>
+  </div>
+  <button class="hero-arrow" (click)="nextPlace()" aria-label="Next">
+    <span>&#8250;</span>
+  </button>
+
+  <div class="category-tabs">
+    @for (cat of categories; track cat.key) {
+      <button
+        class="category-tab"
+        [class.active]="cat.key === activeCategory"
+        (click)="selectCategory(cat.key)"
+      >
+        {{ cat.label }}
+      </button>
+    }
+  </div>
+</section>
+
+<section class="destacadas" id="experiencias-destacadas">
+  <h2>Featured Cultural Experiences</h2>
+
+  @if (isLoading) {
+    <p class="loading-text">Loading experiences...</p>
+  } @else if (filteredExperiences.length === 0) {
+    <p class="empty-text">No experiences available in this category yet.</p>
+  } @else {
+    <div class="experiences-grid">
+      @for (exp of filteredExperiences; track exp.id) {
+        <app-experience-card [data]="exp" (favoriteToggle)="toggleFavorite($event)"></app-experience-card>
+      }
+    </div>
+  }
+</section>
+
+<section class="best-places">
+  <h2>Best Cultural Places</h2>
+
+  <div class="carousel">
+    <button class="carousel-arrow" (click)="previousPlace()" aria-label="Previous">&#8249;</button>
+
+    <div class="carousel-slide">
+      <img [src]="currentBestPlace.imageUrl" [alt]="currentBestPlace.name" />
+      <div class="slide-caption">{{ currentBestPlace.rank }}. {{ currentBestPlace.name }}</div>
+    </div>
+
+    <button class="carousel-arrow" (click)="nextPlace()" aria-label="Next">&#8250;</button>
+  </div>
+</section>

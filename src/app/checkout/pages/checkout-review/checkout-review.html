@@ -1,0 +1,44 @@
+@if (item) {
+  <div class="checkout-page">
+    <div class="main-column">
+      <h1>Review your personal details</h1>
+      <p class="secure-note">
+        <mat-icon>lock</mat-icon>
+        Fast and secure booking
+      </p>
+
+      <div class="personal-data-card">
+        @if (!isEditing) {
+          <div class="data-view">
+            <div>
+              <p class="name">{{ fullName || 'Name not specified' }}</p>
+              <p class="email">{{ email || 'email@domain.com' }}</p>
+              <p class="phone">{{ phone || '(+1) 000000000' }}</p>
+            </div>
+            <a class="modify-link" (click)="toggleEdit()">Edit details</a>
+          </div>
+        } @else {
+          <div class="data-edit">
+            <label>
+              Full name
+              <input type="text" [(ngModel)]="fullName" placeholder="Jane Doe" />
+            </label>
+            <label>
+              Email address
+              <input type="email" [(ngModel)]="email" placeholder="email@domain.com" />
+            </label>
+            <label>
+              Mobile phone
+              <input type="tel" [(ngModel)]="phone" placeholder="+1 999 999 9999" />
+            </label>
+            <button class="btn-save" (click)="toggleEdit()">Save</button>
+          </div>
+        }
+      </div>
+
+      <button class="btn-proceed" (click)="proceedToPayment()">Proceed to payment</button>
+    </div>
+
+    <app-checkout-summary [item]="item"></app-checkout-summary>
+  </div>
+}

@@ -1,0 +1,27 @@
+<div class="favorites-page">
+  <h1>Favorites</h1>
+
+  @if (isLoading) {
+    <p class="loading-text">Loading favorites...</p>
+  } @else if (favorites.length === 0) {
+    <p class="empty-text">You don't have any favorite experiences yet.</p>
+  } @else {
+    <div class="favorites-grid">
+      @for (fav of pagedFavorites; track fav.id) {
+        <app-experience-card [data]="fav" (favoriteToggle)="removeFavorite($event)"></app-experience-card>
+      }
+    </div>
+
+    @if (totalPages > 1) {
+      <div class="pagination">
+        <button class="page-arrow" (click)="previousPage()" aria-label="Previous">&#8249;</button>
+        @for (page of pageNumbers; track page) {
+          <button class="page-number" [class.active]="page === currentPage" (click)="goToPage(page)">
+            {{ page }}
+          </button>
+        }
+        <button class="page-arrow" (click)="nextPage()" aria-label="Next">&#8250;</button>
+      </div>
+    }
+  }
+</div>

@@ -1,0 +1,25 @@
+<a class="experience-card" [routerLink]="['/experience-detail', data.id]">
+  <div class="card-image">
+    <img [src]="data.imageUrl" [alt]="data.title" loading="lazy" />
+    <button
+      mat-icon-button
+      class="favorite-btn"
+      [attr.aria-label]="data.isFavorite ? 'Remove from favorites' : 'Add to favorites'"
+      (click)="onFavoriteClick($event)"
+    >
+      <mat-icon>{{ data.isFavorite ? 'favorite' : 'favorite_border' }}</mat-icon>
+    </button>
+  </div>
+
+  <div class="card-body">
+    @if (data.badgeLabel) {
+      <span class="badge-label">{{ data.badgeLabel }}</span>
+    }
+    <h3 class="card-title">{{ data.title }}</h3>
+    @if (data.durationLabel) {
+      <p class="duration-label">{{ data.durationLabel }}</p>
+    }
+    <app-star-rating [rating]="data.rating"></app-star-rating>
+    <p class="price-label">From {{ data.currency || 'S/.' }} {{ data.priceFrom }} per person</p>
+  </div>
+</a>

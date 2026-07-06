@@ -1,0 +1,114 @@
+<div class="signup-container">
+  <mat-card class="signup-card">
+    <mat-card-header>
+      <div class="logo-container">
+        <img src="/TravelMatchLogo.png" alt="TravelMatch" class="logo" />
+      </div>
+      <mat-card-title>Sign Up</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+        <!-- Email -->
+        <mat-form-field appearance="outline" floatLabel="always">
+          <mat-label>Email Address</mat-label>
+          <input
+            matInput
+            formControlName="email"
+            type="email"
+            placeholder="example@email.com"
+            required
+          />
+          @if (emailControl.hasError('required') && (emailControl.dirty || emailControl.touched)) {
+            <mat-error>Email is required.</mat-error>
+          }
+          @if (emailControl.hasError('email') && (emailControl.dirty || emailControl.touched)) {
+            <mat-error>Please enter a valid email address.</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Password -->
+        <mat-form-field appearance="outline" floatLabel="always">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            formControlName="password"
+            type="password"
+            placeholder="At least 6 characters"
+            required
+          />
+          @if (passwordControl.hasError('required') && (passwordControl.dirty || passwordControl.touched)) {
+            <mat-error>Password is required.</mat-error>
+          }
+          @if (passwordControl.hasError('minlength') && (passwordControl.dirty || passwordControl.touched)) {
+            <mat-error>The password must be at least 6 characters long.</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- First Name -->
+        <mat-form-field appearance="outline" floatLabel="always">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="firstName" required />
+          @if (firstNameControl.hasError('required') && (firstNameControl.dirty || firstNameControl.touched)) {
+            <mat-error>First name is required.</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Last Name -->
+        <mat-form-field appearance="outline" floatLabel="always">
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="lastName" required />
+          @if (lastNameControl.hasError('required') && (lastNameControl.dirty || lastNameControl.touched)) {
+            <mat-error>Last name is required.</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Phone -->
+        <mat-form-field appearance="outline" floatLabel="always">
+          <mat-label>Phone Number</mat-label>
+          <input
+            matInput
+            formControlName="phone"
+            type="tel"
+            placeholder="e.g., +51 987654321"
+            required
+          />
+          @if (phoneControl.hasError('required') && (phoneControl.dirty || phoneControl.touched)) {
+            <mat-error>Phone number is required.</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Roles -->
+        <div class="role-selection">
+          <label>User Type:</label>
+          <mat-radio-group formControlName="role" required>
+            <mat-radio-button value="ROLE_TOURIST">Tourist</mat-radio-button>
+            <mat-radio-button value="ROLE_AGENCY_STAFF">Agency Staff</mat-radio-button>
+            <mat-radio-button value="ROLE_ADMIN">Administrator</mat-radio-button>
+          </mat-radio-group>
+          @if (roleControl.hasError('required') && (roleControl.dirty || roleControl.touched)) {
+            <div class="mat-mdc-form-field-error">Please select a user type.</div>
+          }
+        </div>
+
+        <!-- Submit Button -->
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="form.invalid"
+        >
+          Sign Up
+        </button>
+
+        <!-- Login Link -->
+        <div class="login-link">
+          <span>Already have an account? </span>
+          <a (click)="navigateToLogin()" class="link-button">Log In</a>
+        </div>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,60 @@
+@use '../../../../styles/variables' as *;
+
+.loading,
+.empty {
+  font-family: $font-family-secondary;
+  color: $color-soft-gray;
+}
+
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 1rem;
+}
+
+.review-card {
+  background-color: $color-white;
+  border: 1px solid $color-soft-gray;
+  border-radius: 12px;
+  padding: 16px;
+  font-family: $font-family-secondary;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.reviewer-name {
+  font-family: $font-family-primary;
+  font-weight: $font-weight-h2;
+  color: $color-navy-blue;
+}
+
+.rating {
+  color: $color-sand-yellow;
+  font-size: $font-size-caption;
+}
+
+.date {
+  display: block;
+  color: $color-soft-gray;
+  font-size: $font-size-caption;
+  margin-bottom: 8px;
+}
+
+.comment {
+  font-style: italic;
+  color: $color-navy-blue;
+  margin: 0;
+  line-height: 1.5;
+}
+
+@media (max-width: 700px) {
+  .review-grid {
+    grid-template-columns: 1fr;
+  }
+}

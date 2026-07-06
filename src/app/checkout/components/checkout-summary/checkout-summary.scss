@@ -1,0 +1,85 @@
+@use '../../../../styles/variables' as *;
+
+.checkout-summary {
+  h2 {
+    margin: 0 0 16px 0;
+  }
+}
+
+.summary-card {
+  background-color: $color-white;
+  border: 1px solid $color-soft-gray;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.summary-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+
+  img {
+    width: 56px;
+    height: 56px;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  h3 {
+    margin: 0;
+    font-family: $font-family-primary;
+    color: $color-navy-blue;
+  }
+}
+
+.summary-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-top: 1px solid $color-light-beige;
+  font-family: $font-family-secondary;
+  color: $color-navy-blue;
+
+  mat-icon {
+    color: $color-navy-blue;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .ok-icon {
+    color: #2e7d32;
+  }
+
+  .edit-link {
+    color: $color-light-blue;
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.summary-divider {
+  border-top: 1px solid $color-light-beige;
+  margin: 4px 0;
+}
+
+.summary-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid $color-soft-gray;
+  margin-top: 8px;
+  padding-top: 12px;
+  font-family: $font-family-primary;
+  color: $color-navy-blue;
+
+  strong {
+    font-size: 20px;
+  }
+}

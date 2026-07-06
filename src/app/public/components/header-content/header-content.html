@@ -1,0 +1,164 @@
+<mat-toolbar>
+  @if (isMobile) {
+    <button
+      mat-icon-button
+      (click)="toggleSidenav.emit()"
+      aria-label="Open menu"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+  }
+
+  <a class="logo-container" routerLink="/home">
+    <img
+      ngSrc="/TravelMatchLogo.png"
+      width="100"
+      height="100"
+      alt="TravelMatch Logo"
+      priority
+    />
+    <span class="logo-text">TravelMatch</span>
+  </a>
+
+
+  @if (!isMobile) {
+    <form class="search-bar" (ngSubmit)="onSearch()" [formGroup]="searchForm">
+      <mat-form-field appearance="fill">
+        <mat-icon matPrefix>search</mat-icon>
+        <input
+          type="text"
+          matInput
+          placeholder="{{ 'COMMON.SEARCH_PLACEHOLDER' | translate }}"
+          formControlName="query"
+          [matAutocomplete]="auto"
+        />
+        <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption>
+          <mat-option *ngFor="let option of filteredOptions" [value]="option">
+            {{ option }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-icon matPrefix>calendar_today</mat-icon>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          placeholder="{{ 'COMMON.DATE' | translate }}"
+          formControlName="date"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit">
+        {{ 'COMMON.FIND' | translate }}
+      </button>
+    </form>
+  }
+
+  @if (isMobile) {
+    <span class="spacer"></span> <button
+      mat-icon-button
+      (click)="openSearchSidenav()"
+      aria-label="Open search"
+      class="mobile-search-button"
+    >
+      <mat-icon>search</mat-icon>
+    </button>
+  }
+
+  <span class="spacer"></span>
+
+  <!-- Navigation -->
+  @if(!isMobile){
+    <div class="nav-links">
+      <a mat-button routerLink="/favorites" routerLinkActive="active-link">
+        <mat-icon>favorite</mat-icon>
+      </a>
+      <a mat-button routerLink="/carts" routerLinkActive="active-link">
+        <mat-icon>shopping_cart</mat-icon>
+      </a>
+      <a mat-button routerLink="/bookings" routerLinkActive="active-link">
+        <mat-icon>confirmation_number</mat-icon>
+      </a>
+    </div>
+  }
+
+  <!-- Language Switcher Component -->
+  <app-language-switcher />
+
+  @if(!isMobile) {
+    <!-- User Profile Menu -->
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="User options">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      @if (isSignedIn) {
+        <ng-container>
+          <button mat-menu-item disabled>
+            <mat-icon>person</mat-icon>
+            <span>{{ 'HEADER.WELCOME' | translate }}, {{ currentEmail }}</span>
+          </button>
+          <button mat-menu-item (click)="goToProfile()">
+            <mat-icon>manage_accounts</mat-icon>
+            <span>{{ 'HEADER.PROFILE' | translate }}</span>
+          </button>
+          <button mat-menu-item (click)="onSignOut()">
+            <mat-icon>logout</mat-icon>
+            <span>{{ 'HEADER.SIGN_OUT' | translate }}</span>
+          </button>
+        </ng-container>
+      }
+    </mat-menu>
+  }
+
+</mat-toolbar>
+
+<mat-sidenav #searchSidenav mode="over" position="end" class="mobile-search-sidenav">
+  <div class="sidenav-header search-sidenav-header">
+    <h3 class="search-sidenav-title">{{ 'HEADER.SEARCH' | translate }}</h3>
+    <button
+      mat-icon-button
+      (click)="closeSearchSidenav()"
+      aria-label="Close search"
+      class="close-button"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <form class="search-bar-mobile" (ngSubmit)="onSearch()" [formGroup]="searchForm">
+    <mat-form-field appearance="fill">
+      <mat-icon matPrefix>search</mat-icon>
+      <input
+        type="text"
+        matInput
+        placeholder="{{ 'COMMON.SEARCH_PLACEHOLDER' | translate }}"
+        formControlName="query"
+        [matAutocomplete]="auto"
+      />
+      <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption>
+        <mat-option *ngFor="let option of filteredOptions" [value]="option">
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-icon matPrefix>calendar_today</mat-icon>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        placeholder="{{ 'COMMON.DATE' | translate }}"
+        formControlName="date"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">
+      {{ 'COMMON.FIND' | translate }}
+    </button>
+  </form>
+</mat-sidenav>

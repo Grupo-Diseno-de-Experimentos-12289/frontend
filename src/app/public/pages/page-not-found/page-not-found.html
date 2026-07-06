@@ -1,0 +1,24 @@
+<div class="not-found-wrapper">
+  <mat-card class="not-found-card">
+    <img
+      ngSrc="TravelMatchLogo.png"
+      width="100"
+      height="100"
+      alt="TravelMatch Logo"
+      priority
+      class="logo"
+    />
+
+    <h1 class="error-code">404</h1>
+    <p class="error-title">{{'PAGE_NOT_FOUND.TITLE' | translate }}</p>
+    <p class="error-message">
+      {{'PAGE_NOT_FOUND.MESSAGE' | translate }}<br />
+      <span class="invalid-url">/{{ invalidUrl }}</span>
+    </p>
+
+    <button mat-raised-button color="primary" (click)="goHome()" (mouseenter)="hovering = true" (mouseleave)="hovering = false">
+      <mat-icon>home</mat-icon>
+      {{'PAGE_NOT_FOUND.GO_HOME' | translate }}
+    </button>
+  </mat-card>
+</div>

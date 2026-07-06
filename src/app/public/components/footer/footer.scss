@@ -1,0 +1,93 @@
+@use '../../../../styles/variables' as *;
+
+.app-footer {
+  background-color: $color-sand-yellow;
+  padding: 40px 32px 0 32px;
+  margin-top: 40px;
+  font-family: $font-family-secondary;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  justify-content: space-between;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-bottom: 24px;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 140px;
+
+  h4 {
+    font-family: $font-family-primary;
+    font-weight: $font-weight-h2;
+    color: $color-navy-blue;
+    margin: 0 0 6px 0;
+    font-size: $font-size-body;
+    letter-spacing: 0.5px;
+  }
+
+  a {
+    color: $color-navy-blue;
+    text-decoration: none;
+    font-size: $font-size-body;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.social-icons {
+  display: flex;
+  gap: 10px;
+
+  .social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background-color: $color-navy-blue;
+    color: $color-white;
+    transition: opacity 0.15s ease-in-out;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+.footer-brand {
+  display: flex;
+  align-items: flex-start;
+  font-family: $font-family-primary;
+  font-weight: 800;
+  font-size: 22px;
+  color: $color-navy-blue;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(28, 31, 43, 0.15);
+  text-align: center;
+  padding: 16px 0;
+  font-size: $font-size-caption;
+  color: $color-navy-blue;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    justify-content: flex-start;
+  }
+
+  .footer-brand {
+    width: 100%;
+    justify-content: center;
+  }
+}

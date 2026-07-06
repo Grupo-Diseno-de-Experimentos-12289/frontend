@@ -1,0 +1,202 @@
+@use '../../../../styles/variables' as *;
+
+:host {
+  display: block;
+  margin: -20px; // compensa el padding del main-container para dar full-bleed al hero
+}
+
+.hero {
+  position: relative;
+  height: 420px;
+  background-image: url('https://images.unsplash.com/photo-1587595431973-160d0d94add1?auto=format&fit=crop&w=1600&q=80');
+  background-size: cover;
+  background-position: center;
+  color: $color-white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(28, 31, 43, 0.15) 0%, rgba(28, 31, 43, 0.55) 100%);
+}
+
+.hero-content {
+  position: relative;
+  padding: 32px 40px 24px 40px;
+  max-width: 800px;
+
+  h1 {
+    font-family: $font-family-primary;
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin: 0 0 12px 0;
+    color: $color-white;
+  }
+}
+
+.hero-link {
+  color: $color-white;
+  font-family: $font-family-secondary;
+  font-size: $font-size-body;
+  text-decoration: underline;
+}
+
+.hero-arrow {
+  position: absolute;
+  top: 50%;
+  right: 24px;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: $color-white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+}
+
+.category-tabs {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.category-tab {
+  flex: 1;
+  min-width: 140px;
+  padding: 18px 16px;
+  border: none;
+  background-color: rgba(28, 31, 43, 0.55);
+  color: $color-white;
+  font-family: $font-family-primary;
+  font-size: 18px;
+  font-weight: $font-weight-h2;
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+
+  &.active {
+    background-color: $color-light-beige;
+    color: $color-navy-blue;
+  }
+
+  &:hover:not(.active) {
+    background-color: rgba(28, 31, 43, 0.75);
+  }
+}
+
+.destacadas,
+.best-places {
+  padding: 40px;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+}
+
+.loading-text,
+.empty-text {
+  text-align: center;
+  color: $color-soft-gray;
+  font-family: $font-family-secondary;
+}
+
+.experiences-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.carousel-arrow {
+  background: none;
+  border: none;
+  font-size: 40px;
+  color: $color-navy-blue;
+  cursor: pointer;
+  padding: 8px 16px;
+
+  &:hover {
+    color: $color-light-blue;
+  }
+}
+
+.carousel-slide {
+  position: relative;
+  flex: 1;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+
+  img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+.slide-caption {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background-color: rgba(28, 31, 43, 0.55);
+  color: $color-white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-family: $font-family-primary;
+  font-weight: $font-weight-h2;
+}
+
+@media (max-width: 900px) {
+  .experiences-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  :host {
+    margin: -20px -20px 0 -20px;
+  }
+
+  .hero {
+    height: auto;
+    padding-bottom: 8px;
+  }
+
+  .hero-content h1 {
+    font-size: 28px;
+  }
+
+  .experiences-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .destacadas,
+  .best-places {
+    padding: 24px 16px;
+  }
+}

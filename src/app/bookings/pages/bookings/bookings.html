@@ -1,0 +1,21 @@
+<div class="bookings-page">
+  <h1>Current bookings</h1>
+
+  @if (bookings.length === 0) {
+    <p class="empty">You don't have any bookings yet</p>
+  } @else {
+    <div class="bookings-list">
+      @for (booking of bookings; track booking.id) {
+        <app-trip-item-card [data]="booking">
+          @if (booking.refundRequested) {
+            <span class="refund-status">Refund requested</span>
+          } @else {
+            <button class="btn-refund" (click)="requestRefund(booking.id)">
+              <mat-icon>attach_money</mat-icon> Request refund
+            </button>
+          }
+        </app-trip-item-card>
+      }
+    </div>
+  }
+</div>

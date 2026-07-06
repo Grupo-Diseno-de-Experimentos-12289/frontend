@@ -1,0 +1,13 @@
+<div *ngIf="isLoading" class="loading">Loading availability...</div>
+
+<div *ngIf="!isLoading && availabilities.length === 0" class="empty">
+  <p>No availability for this experience.</p>
+</div>
+
+<ul *ngIf="!isLoading && availabilities.length > 0" class="availability-list">
+  <li *ngFor="let slot of availabilities" class="availability-slot">
+    <strong>{{ formatDate(slot.startDateTime) }}</strong>
+    &nbsp;from {{ formatTime(slot.startDateTime) }} to {{ formatTime(slot.endDateTime) }} —
+    <strong>{{ slot.capacity }}</strong> spots available
+  </li>
+</ul>

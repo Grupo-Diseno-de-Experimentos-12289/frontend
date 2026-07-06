@@ -1,0 +1,291 @@
+@use '../../../../styles/variables' as *;
+
+mat-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap; // Permite que los elementos se envuelvan en pantallas pequeñas
+  min-height: 100px; // Altura mínima para el toolbar
+  padding: 0 20px; // Padding horizontal para el toolbar
+  background-color: $color-light-beige; // Usa tu color de fondo principal
+  color: $color-navy-blue; // Color de texto principal
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); // Sutil sombra para el header
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 100%; // Asegura que el contenedor del logo ocupe la altura del toolbar
+  margin-right: 24px; // Espacio a la derecha del logo
+  text-decoration: none;
+  img {
+    // Ajustar el tamaño del logo para que no sea tan grande
+    width: 44px;
+    height: 44px;
+    object-fit: contain; // Asegura que la imagen se ajuste sin distorsionarse
+  }
+
+  .logo-text {
+    font-family: $font-family-primary;
+    font-weight: 800;
+    font-size: 20px;
+    color: $color-navy-blue;
+    white-space: nowrap;
+  }
+}
+
+.spacer {
+  flex: 1 1 auto; // Empuja los elementos a los extremos
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  // Reduce el gap entre los elementos del formulario para que estén más juntos
+  gap: 5px;
+  padding: 5px; // Ajusta el padding para un look más compacto
+  background-color: $color-white; // Fondo blanco para la barra de búsqueda
+  border-radius: 25px; // Bordes muy redondeados para el estilo de la primera imagen
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); // Sombra más prominente
+  flex-grow: 1; // Permite que la barra de búsqueda crezca
+  max-width: 600px; // Limita el ancho máximo para que no se extienda demasiado en pantallas grandes
+  margin: 0 50px; // Centrar un poco en la barra de navegación
+
+  mat-form-field {
+    // Estilos generales para los campos de formulario
+    width: auto; // Deja que el contenido determine el ancho, o puedes dar un ancho específico si lo prefieres
+    margin: 0;
+    background-color: transparent; // Importante para que el fondo blanco de la barra de búsqueda se vea
+    font-family: $font-family-secondary; // Usa tu fuente secundaria para los inputs
+
+    // Overrides específicos para Angular Material para quitar el fondo y padding por defecto
+    ::ng-deep .mat-form-field-wrapper {
+      padding-bottom: 0 !important;
+      margin-top: 0 !important; // Quita el margen superior por defecto de mat-form-field
+    }
+
+    ::ng-deep .mat-form-field-flex {
+      background: transparent !important; // Fondo transparente para el área flexible
+      padding-top: 0 !important; // Elimina el padding superior
+      padding-bottom: 0 !important; // Elimina el padding inferior
+    }
+
+    ::ng-deep .mat-form-field-infix {
+      padding: 1px 0 !important; // Ajusta el padding interno del input
+      border-top: none !important; // Elimina bordes superiores que puedan aparecer
+    }
+
+    ::ng-deep .mat-form-field-underline {
+      display: none; // Oculta la línea inferior por defecto
+    }
+
+    ::ng-deep .mat-form-field-appearance-fill .mat-form-field-underline::before {
+      background-color: transparent !important; // Elimina el color de la línea de relleno
+    }
+
+    // Estilo para el placeholder y el texto del input
+    input.mat-input-element {
+      color: $color-navy-blue; // Color del texto del input
+      &::placeholder {
+        color: $color-soft-gray; // Color del placeholder
+        opacity: 1; /* Firefox */
+      }
+    }
+
+    // Estilo para los íconos de prefijo
+    mat-icon[matPrefix] {
+      color: $color-soft-gray; // Color de los íconos
+      margin-right: 8px; // Espacio entre el ícono y el texto
+      font-size: 20px; // Tamaño del ícono
+      width: 20px; // Ancho del ícono
+      height: 20px; // Alto del ícono
+    }
+  }
+
+  // Estilos específicos para el campo de búsqueda de lugares
+  mat-form-field:first-child {
+    border-right: 2px solid $color-soft-gray; // Separador vertical como en la primera imagen
+    padding-right: 15px; // Espacio antes del borde
+  }
+
+  // Estilos específicos para el campo de fecha
+  mat-form-field:nth-child(2) {
+    // Si quieres un borde a la izquierda de la fecha, úsalo aquí
+    // border-left: 1px solid $color-soft-gray;
+    padding-left: 8px; // Espacio después del borde del primer campo
+  }
+
+
+  button[type="submit"] {
+    border-radius: 50px; // Muy redondeado
+    padding: 8px 20px; // Ajusta el padding para que sea más compacto
+    background-color: $color-sand-yellow; // Usa tu color Sand Yellow
+    color: $color-navy-blue; // Texto oscuro en el botón
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15); // Sombra más pronunciada
+    font-weight: $font-weight-h2; // Un poco más audaz
+    font-family: $font-family-primary; // Usa tu fuente primaria para el botón
+    transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+    &:hover {
+      background-color: darken($color-sand-yellow, 10%); // Oscurece al pasar el ratón
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    mat-icon {
+      color: $color-navy-blue; // Color del ícono si añades uno al botón
+    }
+  }
+}
+
+.nav-links {
+  display: flex;
+  gap: 16px; // Espacio entre los íconos de navegación
+  margin-right: 24px; // Espacio a la derecha de los íconos de navegación
+
+  a {
+    color: $color-navy-blue; // Color de los íconos de navegación
+    transition: color 0.2s ease-in-out;
+    &:hover {
+      color: $color-light-blue; // Color al pasar el ratón
+    }
+    mat-icon {
+      font-size: 24px; // Tamaño de los íconos
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  // Estilo para el link activo si lo necesitas
+  .active-link {
+    color: $color-light-blue; // Ejemplo: color diferente para el link activo
+  }
+}
+
+app-language-switcher {
+  margin-right: 16px; // Espacio a la derecha del selector de idioma
+}
+
+button[mat-icon-button][aria-label="User options"] {
+  color: $color-navy-blue; // Color del ícono de usuario
+  mat-icon {
+    font-size: 32px; // Ícono de usuario un poco más grande
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (max-width: 599px) {
+  .logo-text {
+    display: none;
+  }
+}
+
+/* Estilos para el Sidenav de búsqueda móvil */
+.mobile-search-sidenav {
+  // Sobrescribe los estilos por defecto de Angular Material para el sidenav
+  // Esto es crucial para que no sea transparente y tenga el fondo correcto
+  background-color: $color-white !important; // Fondo blanco, ¡importante!
+  width: 90vw; // Ancho del sidenav de búsqueda
+  max-width: 450px; // Ancho máximo para pantallas más grandes
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3) !important; // Sombra más pronunciada
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-sidenav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 15px;
+  border-bottom: 1px solid $color-soft-gray;
+  margin-bottom: 20px;
+
+  .search-sidenav-title {
+    font-family: $font-family-primary;
+    font-size: $font-size-h2;
+    font-weight: $font-weight-h2;
+    color: $color-navy-blue;
+    margin: 0;
+  }
+
+  .close-button {
+    color: $color-navy-blue;
+    &:hover {
+      color: $color-light-blue;
+    }
+  }
+}
+
+.search-bar-mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+
+  mat-form-field {
+    width: 100%;
+    background-color: transparent;
+
+    ::ng-deep .mat-form-field-wrapper {
+      padding-bottom: 0 !important;
+      margin-top: 0 !important;
+    }
+
+    ::ng-deep .mat-form-field-flex {
+      background: transparent !important;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      border: 1px solid $color-soft-gray; // Borde alrededor del campo
+      border-radius: 8px;
+      padding-left: 10px; // Espacio para el ícono
+    }
+
+    ::ng-deep .mat-form-field-infix {
+      padding: 12px 0 !important;
+      border-top: none !important;
+    }
+
+    ::ng-deep .mat-form-field-underline {
+      display: none;
+    }
+
+    ::ng-deep .mat-form-field-appearance-fill .mat-form-field-underline::before {
+      background-color: transparent !important;
+    }
+
+    input.mat-input-element {
+      color: $color-navy-blue;
+      &::placeholder {
+        color: $color-soft-gray;
+        opacity: 1;
+      }
+    }
+
+    mat-icon[matPrefix] {
+      color: $color-soft-gray;
+      margin-right: 10px;
+      font-size: 22px;
+      width: 22px;
+      height: 22px;
+    }
+  }
+
+  button[type="submit"] {
+    width: 100%;
+    border-radius: 8px;
+    padding: 12px 20px;
+    background-color: $color-sand-yellow;
+    color: $color-navy-blue;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+    font-weight: $font-weight-h2;
+    font-family: $font-family-primary;
+    transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+    &:hover {
+      background-color: darken($color-sand-yellow, 10%);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+  }
+}

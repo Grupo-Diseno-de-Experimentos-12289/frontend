@@ -1,0 +1,93 @@
+<mat-sidenav-container>
+    @if(isMobile){
+        <mat-sidenav
+            #sidenav
+            [mode]="isMobile ? 'over' : 'side'"
+            [opened]="!isMobile"
+            class="mobile-menu"
+        >
+            <div class="sidenav-header">
+                <a class="logo-container-sidenav" routerLink="/home" (click)="close()">
+                    <img
+                            ngSrc="/TravelMatchLogo.png"
+                            width="80"
+                            height="80"
+                            alt="TravelMatch Logo"
+                            priority
+                    />
+                </a>
+                <button
+                        mat-icon-button
+                        (click)="close()"
+                        aria-label="Close sidenav"
+                        class="close-button"
+                >
+                    <mat-icon>close</mat-icon>
+                </button>
+            </div>
+
+            <mat-nav-list class="sidenav-nav-list">
+                <a mat-list-item routerLink="/home" (click)="close()" routerLinkActive="active-sidenav-link">
+                    <mat-icon matListItemIcon>home</mat-icon>
+                    <span matListItemTitle>{{ 'NAV.HOME' | translate }}</span>
+                </a>
+                <a mat-list-item routerLink="/experiences" (click)="close()" routerLinkActive="active-sidenav-link">
+                    <mat-icon matListItemIcon>travel_explore</mat-icon>
+                    <span matListItemTitle>{{ 'NAV.EXPERIENCES' | translate }}</span>
+                </a>
+                <a mat-list-item routerLink="/about-us" (click)="close()" routerLinkActive="active-sidenav-link">
+                    <mat-icon matListItemIcon>info</mat-icon>
+                    <span matListItemTitle>{{ 'NAV.ABOUT_US' | translate }}</span>
+                </a>
+                <a mat-list-item routerLink="/contact" (click)="close()" routerLinkActive="active-sidenav-link">
+                    <mat-icon matListItemIcon>mail</mat-icon>
+                    <span matListItemTitle>{{ 'NAV.CONTACT' | translate }}</span>
+                </a>
+
+                <mat-divider></mat-divider>
+
+                @if (isSignedIn) {
+                    <a mat-list-item (click)="goToProfile(); close()" routerLinkActive="active-sidenav-link">
+                        <mat-icon matListItemIcon>person</mat-icon>
+                        <span matListItemTitle>{{ 'HEADER.PROFILE' | translate }}</span>
+                    </a>
+                    <a mat-list-item (click)="onSignOut(); close()" routerLinkActive="active-sidenav-link">
+                        <mat-icon matListItemIcon>logout</mat-icon>
+                        <span matListItemTitle>{{ 'HEADER.SIGN_OUT' | translate }}</span>
+                    </a>
+                } @else {
+                    <a mat-list-item routerLink="/sign-in" (click)="close()" routerLinkActive="active-sidenav-link">
+                        <mat-icon matListItemIcon>login</mat-icon>
+                        <span matListItemTitle>{{ 'AUTH.SIGN_IN' | translate }}</span>
+                    </a>
+                    <a mat-list-item routerLink="/sign-up" (click)="close()" routerLinkActive="active-sidenav-link">
+                        <mat-icon matListItemIcon>person_add</mat-icon>
+                        <span matListItemTitle>{{ 'AUTH.SIGN_UP' | translate }}</span>
+                    </a>
+                }
+
+                <mat-divider></mat-divider>
+
+                <a mat-list-item routerLink="/favorites" (click)="close()" routerLinkActive="active-sidenav-link">
+                    <mat-icon matListItemIcon>favorite</mat-icon>
+                    <span matListItemTitle>{{ 'HEADER.FAVORITES' | translate }}</span>
+                </a>
+                <a mat-list-item routerLink="/carts" (click)="close()" routerLinkActive="active-sidenav-link">
+                    <mat-icon matListItemIcon>shopping_cart</mat-icon>
+                    <span matListItemTitle>{{ 'HEADER.CART' | translate }}</span>
+                </a>
+                <a mat-list-item routerLink="/bookings" (click)="close()" routerLinkActive="active-sidenav-link">
+                    <mat-icon matListItemIcon>confirmation_number</mat-icon>
+                    <span matListItemTitle>{{ 'HEADER.BOOKINGS' | translate }}</span>
+                </a>
+            </mat-nav-list>
+        </mat-sidenav>
+    }
+    <mat-sidenav-content>
+        <app-header-content (toggleSidenav)="sidenav.toggle()"></app-header-content>
+        <main class="main-container">
+            <router-outlet></router-outlet>
+        </main>
+        <app-footer></app-footer>
+    </mat-sidenav-content>
+</mat-sidenav-container>

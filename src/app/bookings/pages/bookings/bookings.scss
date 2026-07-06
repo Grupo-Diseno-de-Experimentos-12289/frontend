@@ -1,0 +1,46 @@
+@use '../../../../styles/variables' as *;
+
+.bookings-page {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.empty {
+  font-family: $font-family-secondary;
+  color: $color-soft-gray;
+}
+
+.bookings-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-refund {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: $color-light-blue;
+  color: $color-white;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 20px;
+  font-family: $font-family-secondary;
+  font-weight: $font-weight-h2;
+  cursor: pointer;
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
+
+  &:hover {
+    background-color: darken($color-light-blue, 8%);
+  }
+}
+
+.refund-status {
+  font-family: $font-family-secondary;
+  color: $color-soft-gray;
+  font-style: italic;
+}

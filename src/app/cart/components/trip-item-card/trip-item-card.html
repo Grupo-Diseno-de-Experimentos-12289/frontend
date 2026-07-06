@@ -1,0 +1,25 @@
+<div class="trip-item-card">
+  <img class="thumb" [src]="data.imageUrl" [alt]="data.title" />
+
+  <div class="details">
+    <h3 class="title">{{ data.title }}</h3>
+    <p class="meta">
+      <mat-icon>schedule</mat-icon>
+      {{ formattedDate }}
+    </p>
+    <p class="meta">
+      <mat-icon>group</mat-icon>
+      {{ data.adults }} {{ data.adults === 1 ? 'adult' : 'adults' }}
+    </p>
+    @if (data.rating) {
+      <app-star-rating [rating]="data.rating"></app-star-rating>
+    }
+  </div>
+
+  <div class="footer">
+    <div class="actions">
+      <ng-content></ng-content>
+    </div>
+    <span class="price">{{ price.toFixed(2) }} PEN</span>
+  </div>
+</div>

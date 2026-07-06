@@ -1,0 +1,48 @@
+@use '../../../../styles/variables' as *;
+@use '../../../../styles/auth-forms' as *;
+
+.signin-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: linear-gradient(135deg, rgba(28, 31, 43, 0.8), rgba(58, 113, 193, 0.6)),
+  url('https://www.machupicchu.org/wp-content/uploads/what-month-is-a-good-time-to-visit-machu-picchu.jpg')
+  center center / cover fixed;
+}
+
+.signin-card {
+  @extend .auth-card-base;
+
+  .mat-mdc-card-content {
+    form {
+      .register-link {
+        text-align: center;
+        margin-top: 16px;
+        font-family: $font-family-secondary;
+        font-size: 14px;
+        color: $color-soft-gray;
+
+        .link-button {
+          color: $color-light-blue;
+          cursor: pointer;
+          text-decoration: none;
+          font-weight: 500;
+
+          &:hover {
+            text-decoration: underline;
+            color: darken($color-light-blue, 10%);
+          }
+        }
+      }
+    }
+  }
+}
+
+// Responsive: adjust padding for small screens
+@media (max-width: 480px) {
+  .signin-container {
+    padding: 12px;
+  }
+}

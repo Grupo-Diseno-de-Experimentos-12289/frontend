@@ -1,0 +1,67 @@
+@use '../../../../styles/variables' as *;
+
+.favorites-page {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.loading-text,
+.empty-text {
+  font-family: $font-family-secondary;
+  color: $color-soft-gray;
+}
+
+.favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 32px;
+}
+
+.page-arrow {
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: $color-navy-blue;
+  cursor: pointer;
+
+  &:hover {
+    color: $color-light-blue;
+  }
+}
+
+.page-number {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid $color-soft-gray;
+  background-color: $color-white;
+  color: $color-navy-blue;
+  font-family: $font-family-secondary;
+  cursor: pointer;
+
+  &.active {
+    background-color: $color-navy-blue;
+    color: $color-white;
+    border-color: $color-navy-blue;
+  }
+}
+
+@media (max-width: 900px) {
+  .favorites-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .favorites-grid {
+    grid-template-columns: 1fr;
+  }
+}

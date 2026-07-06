@@ -1,0 +1,22 @@
+@use '../../../../styles/variables' as *;
+
+.star-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.star {
+  color: $color-sand-yellow;
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+.rating-value {
+  margin-left: 6px;
+  font-family: $font-family-primary;
+  font-weight: $font-weight-h2;
+  color: $color-navy-blue;
+  font-size: $font-size-body;
+}

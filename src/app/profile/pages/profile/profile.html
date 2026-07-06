@@ -1,0 +1,48 @@
+<div class="profile-page">
+  @if (showSuccessBanner) {
+    <div class="success-banner">Your details were saved successfully</div>
+  }
+
+  <div class="profile-layout">
+    <div class="avatar-panel">
+      <img [src]="avatarUrl" alt="Profile photo" class="avatar" />
+      <input
+        #fileInput
+        type="file"
+        accept="image/*"
+        class="hidden-input"
+        (change)="onFileSelected($event)"
+      />
+      <button class="btn-dark" (click)="changePhoto()">Change photo</button>
+      <button class="btn-dark" (click)="save()">Save</button>
+    </div>
+
+    <div class="form-panel">
+      <h2>Personal details</h2>
+      <div class="form-row">
+        <label>
+          First name
+          <input type="text" [(ngModel)]="firstName" placeholder="First name" />
+        </label>
+        <label>
+          Last name
+          <input type="text" [(ngModel)]="lastName" placeholder="Last name" />
+        </label>
+      </div>
+
+      <h2>Contact information</h2>
+      <div class="form-row">
+        <label>
+          Mobile phone
+          <input type="tel" [(ngModel)]="phone" placeholder="+1 999 999 9999" />
+        </label>
+        <label>
+          Email address
+          <input type="email" [(ngModel)]="email" placeholder="email@domain.com" />
+        </label>
+      </div>
+
+      <button class="btn-save" (click)="save()">Save</button>
+    </div>
+  </div>
+</div>

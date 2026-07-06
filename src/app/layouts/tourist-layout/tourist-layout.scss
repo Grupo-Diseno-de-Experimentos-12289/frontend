@@ -1,0 +1,109 @@
+@use '../../../styles/variables' as *;
+
+mat-sidenav-container {
+  height: 100vh; // Asegura que el contenedor ocupe toda la altura de la vista
+  background-color: $color-light-beige; // Fondo general del layout
+}
+
+.mat-sidenav-content {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; // Asegura que el contenido principal también ocupe la altura
+}
+
+.main-container {
+  flex-grow: 1; // Permite que el contenido principal ocupe el espacio restante
+  padding: 20px; // Un padding general para el contenido principal
+  background-color: $color-light-beige; // Asegura que el fondo del contenido sea el deseado
+  color: $color-navy-blue; // Color de texto principal
+}
+
+// Estilos para el Sidenav (solo visible en móvil por el @if)
+.mobile-menu {
+  width: 280px; // Ancho del sidenav
+  background-color: $color-white; // Fondo blanco para el sidenav
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2); // Sombra para el sidenav
+  color: $color-navy-blue; // Color de texto principal en el sidenav
+  padding-bottom: 20px; // Padding en la parte inferior del sidenav
+}
+
+.sidenav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background-color: $color-light-beige; // Un color que contraste o combine con el header
+  border-bottom: 1px solid $color-soft-gray; // Separador visual
+}
+
+.logo-container-sidenav {
+  display: flex;
+  align-items: center;
+  img {
+    width: 60px; // Tamaño del logo en el sidenav
+    height: 60px;
+    object-fit: contain;
+  }
+}
+
+.close-button {
+  color: $color-navy-blue; // Color del ícono de cerrar
+  &:hover {
+    color: $color-light-blue; // Color al pasar el ratón
+  }
+}
+
+.sidenav-nav-list {
+  padding-top: 8px; // Padding en la parte superior de la lista de navegación
+
+  .mat-list-item {
+    height: 48px; // Altura estándar para los elementos de la lista
+    padding: 0 16px; // Padding horizontal para los elementos
+    color: $color-navy-blue; // Color de texto por defecto para los enlaces
+    font-family: $font-family-secondary; // Fuente para los enlaces
+
+    &:hover {
+      background-color: rgba($color-sand-yellow, 0.1); // Fondo suave al pasar el ratón
+      color: $color-navy-blue; // Mantener color de texto al pasar el ratón
+    }
+
+    .mat-icon {
+      margin-right: 16px; // Espacio entre el ícono y el texto
+      color: $color-light-blue; // Color de los íconos de navegación
+      font-size: 20px; // Tamaño de los íconos
+      width: 20px;
+      height: 20px;
+    }
+
+    .mat-list-item-content {
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+  }
+
+  .active-sidenav-link {
+    background-color: $color-light-blue; // Fondo para el enlace activo
+    color: $color-white !important; // Texto blanco para el enlace activo
+    font-weight: 100;
+    border-radius: 4px; // Ligeros bordes redondeados para el item activo
+    margin: 4px 8px; // Margen para que no toque los bordes del sidenav
+    width: calc(100% - 16px); // Ajustar el ancho debido al margen
+
+    .mat-icon {
+      color: $color-white !important; // Ícono blanco para el enlace activo
+    }
+  }
+}
+
+mat-divider {
+  border-top-color: $color-soft-gray; // Color para los divisores
+  margin: 8px 0; // Espacio alrededor de los divisores
+}
+
+// Estilos para cuando el sidenav no está abierto (ej. en escritorio si lo dejas fijo)
+// Aunque con el @if(isMobile) en el HTML, el sidenav solo existe en móvil,
+// estos estilos serían útiles si cambiaras de estrategia (ej. mode="side" en desktop)
+.mat-sidenav-container.mat-sidenav-opened {
+  // Puedes añadir estilos aquí si el sidenav se superpone al contenido
+}

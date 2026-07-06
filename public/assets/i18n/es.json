@@ -1,0 +1,40 @@
+{
+  "HEADER": {
+    "WELCOME": "Bienvenido",
+    "PROFILE": "Perfil",
+    "SIGN_OUT": "Cerrar sesión",
+    "FAVORITES": "Favoritos",
+    "CART": "Carrito",
+    "BOOKINGS": "Reservas",
+    "SEARCH": "Buscar"
+  },
+  "NAV": {
+    "HOME": "Inicio",
+    "EXPERIENCES": "Experiencias",
+    "ABOUT_US": "Sobre nosotros",
+    "CONTACT": "Contacto"
+  },
+  "PAGE_NOT_FOUND": {
+    "TITLE": "Página no encontrada",
+    "MESSAGE": "Lo sentimos, la página que buscabas no está disponible",
+    "GO_HOME": "Volver a Inicio"
+  },
+  "COMMON": {
+    "FIND": "Encontrar",
+    "DATE": "Fecha",
+    "SEARCH_PLACEHOLDER": "Busca lugares"
+  },
+  "FOOTER": {
+    "FOLLOW_US": "Síguenos",
+    "ABOUT_US": "Nosotros",
+    "ABOUT": "Acerca de",
+    "OUR_COMMITMENT": "Nuestro compromiso",
+    "LEGAL": "Legales",
+    "PRIVACY_POLICY": "Política de privacidad",
+    "TERMS": "Términos y condiciones",
+    "RESOURCES": "Recursos",
+    "FAQ": "Preguntas frecuentes",
+    "SALES_SUPPORT": "Asistencia de ventas",
+    "RIGHTS_RESERVED": "Todos los derechos reservados"
+  }
+}

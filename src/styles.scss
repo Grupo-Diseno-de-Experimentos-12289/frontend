@@ -1,0 +1,72 @@
+@use '@angular/material' as mat;
+
+// Custom Theming for Angular Material
+html {
+  @include mat.theme((
+    color: (
+      theme-type: light,
+      primary: (
+        500: #1C1F2B, // Navy Blue
+        contrast: (
+          500: #FFFFFF // White
+        )
+      ),
+      tertiary: (
+        500: #FFD479, // Sand Yellow
+        contrast: (
+          500: #1C1F2B // Navy Blue
+        )
+      ),
+      background: (
+        background: #F5F0E6, // Light Beige (base background)
+        surface: #FFFFFF, // White for cards
+      ),
+    ),
+    typography: (
+      brand-family: 'Nunito Sans, sans-serif',
+      plain-family: 'Inter, sans-serif',
+      bold-weight: 700,
+      medium-weight: 600,
+      regular-weight: 400,
+      // You can add more adjustments if you want to define specific sizes
+    ),
+    density: 0,
+  ));
+}
+
+// Reset and base styles
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Nunito Sans', sans-serif;
+  background-color: #F5F0E6; // Light Beige (base background)
+  color: #1C1F2B; // Navy Blue (main text)
+}
+
+// Example of how you might enforce global typography sizes
+h1 {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+h2 {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+body, p, span, label, input {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.caption, small {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+}

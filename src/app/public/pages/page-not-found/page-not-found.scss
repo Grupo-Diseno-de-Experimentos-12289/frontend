@@ -1,0 +1,138 @@
+@use '../../../../styles/variables' as vars;
+
+.not-found-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(135deg, vars.$color-sand-yellow 0%, vars.$color-light-beige 100%);
+  animation: fadeIn 0.6s ease-out;
+}
+
+.not-found-card {
+  text-align: center;
+  align-items: center;
+  padding: 2rem 3rem;
+  background-color: vars.$color-white;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  max-width: 480px;
+  width: 100%;
+  animation: slideInUp 0.5s ease-out;
+
+  .logo {
+    margin-bottom: 2rem;
+    border-radius: 50%;
+  }
+
+  .error-code {
+    font-size: 72px;
+    font-weight: vars.$font-weight-h1;
+    font-family: vars.$font-family-primary;
+    margin: 0;
+    color: vars.$color-navy-blue;
+  }
+
+  .error-title {
+    font-size: 24px;
+    font-weight: vars.$font-weight-h2;
+    font-family: vars.$font-family-primary;
+    margin-top: 1rem;
+  }
+
+  .error-message {
+    font-size: 16px;
+    font-family: vars.$font-family-secondary;
+    margin-top: 1rem;
+    color: vars.$color-soft-gray;
+
+    .invalid-url {
+      display: block;
+      font-weight: bold;
+      color: vars.$color-light-blue;
+      margin-top: 0.5rem;
+    }
+  }
+
+  button {
+    margin-top: 2rem;
+    background-color: vars.$color-navy-blue;
+    color: vars.$color-white;
+    font-family: vars.$font-family-primary;
+    font-weight: vars.$font-weight-h2;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    mat-icon {
+      font-size: 20px;
+    }
+
+    &:hover {
+      background-color: darken(vars.$color-navy-blue, 10%);
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 600px) {
+  .not-found-card {
+    padding: 1.5rem 1rem;
+    border-radius: 12px;
+    max-width: 90%;
+
+    .error-code {
+      font-size: 48px;
+    }
+
+    .error-title {
+      font-size: 20px;
+    }
+
+    .error-message {
+      font-size: 14px;
+
+      .invalid-url {
+        font-size: 14px;
+        word-break: break-word;
+      }
+    }
+
+    button {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      font-size: 14px;
+
+      mat-icon {
+        font-size: 18px;
+      }
+    }
+  }
+
+  .not-found-wrapper {
+    padding: 1rem;
+  }
+}
+
