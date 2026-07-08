@@ -1,14 +1,16 @@
-<section class="hero">
+<section class="hero" [class.filters-active]="showAdvancedFilters">
   <div class="hero-overlay"></div>
-  <div class="hero-content">
+  
+  <div class="hero-content" [class.hidden]="showAdvancedFilters">
     <h1>Find your next unforgettable experience</h1>
     <a class="hero-link" href="#experiencias-destacadas">Learn more</a>
   </div>
-  <button class="hero-arrow" (click)="nextPlace()" aria-label="Next">
+
+  <button class="hero-arrow" (click)="nextPlace()" aria-label="Next" [class.hidden]="showAdvancedFilters">
     <span>&#8250;</span>
   </button>
 
-  <div class="category-tabs">
+  <div class="category-tabs" [class.hidden]="showAdvancedFilters">
     @for (cat of categories; track cat.key) {
       <button
         class="category-tab"
@@ -19,15 +21,99 @@
       </button>
     }
   </div>
+
+  <div class="filters-panel" [class.visible]="showAdvancedFilters">
+    <h3 class="filters-title">Filtros de Búsqueda</h3>
+    
+    <div class="filters-container-layout">
+      <div class="filter-col">
+        <h4 class="section-title">Ubicación</h4>
+        <div class="filter-group">
+          <label for="country">País</label>
+          <select id="country" [(ngModel)]="filterCountry">
+            <option [ngValue]="''">Seleccionar País</option>
+            <option [ngValue]="'peru'">Perú</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="province">Provincia</label>
+          <select id="province" [(ngModel)]="filterProvince">
+            <option [ngValue]="''">Seleccionar Provincia</option>
+            <option [ngValue]="'lima'">Lima</option>
+            <option [ngValue]="'cusco'">Cusco</option>
+            <option [ngValue]="'puno'">Puno</option>
+          </select>
+        </div>
+
+        <h4 class="section-title">Presupuesto</h4>
+        <div class="filter-row-inline">
+          <div class="filter-group inline-half">
+            <label for="currency">Moneda</label>
+            <select id="currency" [(ngModel)]="filterCurrency">
+              <option [ngValue]="'PEN'">PEN (S/.)</option>
+              <option [ngValue]="'USD'">USD ($)</option>
+            </select>
+          </div>
+          <div class="filter-group inline-half">
+            <label for="budgetRange">Rango de Precio</label>
+            <select id="budgetRange" [(ngModel)]="filterPriceRange">
+              <option [ngValue]="''">Cualquier precio</option>
+              <option [ngValue]="'0-50'">Menos de 50</option>
+              <option [ngValue]="'50-100'">50 a 100</option>
+              <option [ngValue]="'100-200'">100 a 200</option>
+              <option [ngValue]="'200+'">Más de 200</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="vertical-divider"></div>
+
+      <div class="filter-col">
+        <h4 class="section-title">Actividad</h4>
+        <div class="filter-group">
+          <label for="activityType">Tipo de Actividad</label>
+          <select id="activityType" [(ngModel)]="filterActivityType" (change)="selectCategory(filterActivityType)">
+            <option [ngValue]="''">Seleccionar Tipo</option>
+            <option [ngValue]="'cultura'">Cultura</option>
+            <option [ngValue]="'gastronomia'">Gastronomía</option>
+            <option [ngValue]="'naturaleza'">Naturaleza</option>
+            <option [ngValue]="'deporte'">Deporte</option>
+          </select>
+        </div>
+
+        <h4 class="section-title">Fechas</h4>
+        <div class="filter-group">
+          <label for="dateFrom">Desde:</label>
+          <input id="dateFrom" type="date" [(ngModel)]="filterDateFrom" />
+        </div>
+        <div class="filter-group">
+          <label for="dateTo">Hasta:</label>
+          <input id="dateTo" type="date" [(ngModel)]="filterDateTo" />
+        </div>
+      </div>
+    </div>
+
+    <div class="filters-footer">
+      <button class="btn-clear" (click)="clearFilters()">Limpiar Filtros</button>
+    </div>
+  </div>
 </section>
 
 <section class="destacadas" id="experiencias-destacadas">
-  <h2>Featured Cultural Experiences</h2>
+  <div class="destacadas-header">
+    <h2>Featured Cultural Experiences</h2>
+    <button class="btn-filters" (click)="showAdvancedFilters = !showAdvancedFilters">
+      {{ showAdvancedFilters ? 'Hide Filters' : 'Show Filters' }}
+    </button>
+  </div>
 
   @if (isLoading) {
     <p class="loading-text">Loading experiences...</p>
   } @else if (filteredExperiences.length === 0) {
-    <p class="empty-text">No experiences available in this category yet.</p>
+    <div class="empty-state">
+      <p class="empty-text">Sin resultados disponibles que cumplan los criterios de búsqueda.</p>
+    </div>
   } @else {
     <div class="experiences-grid">
       @for (exp of filteredExperiences; track exp.id) {

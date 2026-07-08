@@ -4,26 +4,27 @@ mat-toolbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap; // Permite que los elementos se envuelvan en pantallas pequeñas
-  min-height: 100px; // Altura mínima para el toolbar
-  padding: 0 20px; // Padding horizontal para el toolbar
-  background-color: $color-light-beige; // Usa tu color de fondo principal
-  color: $color-navy-blue; // Color de texto principal
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); // Sutil sombra para el header
+  flex-wrap: wrap;
+  min-height: 100px;
+  padding: 0 20px;
+  background-color: $color-light-beige;
+  color: $color-navy-blue;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .logo-container {
   display: flex;
   align-items: center;
   gap: 8px;
-  height: 100%; // Asegura que el contenedor del logo ocupe la altura del toolbar
-  margin-right: 24px; // Espacio a la derecha del logo
+  height: 100%;
+  margin-right: 24px;
   text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   img {
-    // Ajustar el tamaño del logo para que no sea tan grande
     width: 44px;
     height: 44px;
-    object-fit: contain; // Asegura que la imagen se ajuste sin distorsionarse
+    object-fit: contain;
   }
 
   .logo-text {
@@ -33,145 +34,266 @@ mat-toolbar {
     color: $color-navy-blue;
     white-space: nowrap;
   }
+
+  &.hidden {
+    opacity: 0;
+    visibility: hidden;
+    width: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
 }
 
 .spacer {
-  flex: 1 1 auto; // Empuja los elementos a los extremos
+  flex: 1 1 auto;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  &.hidden {
+    opacity: 0;
+    visibility: hidden;
+    width: 0;
+    flex: 0 0 0;
+    margin: 0;
+  }
 }
 
 .search-bar {
   display: flex;
   align-items: center;
-  // Reduce el gap entre los elementos del formulario para que estén más juntos
-  gap: 5px;
-  padding: 5px; // Ajusta el padding para un look más compacto
-  background-color: $color-white; // Fondo blanco para la barra de búsqueda
-  border-radius: 25px; // Bordes muy redondeados para el estilo de la primera imagen
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); // Sombra más prominente
-  flex-grow: 1; // Permite que la barra de búsqueda crezca
-  max-width: 600px; // Limita el ancho máximo para que no se extienda demasiado en pantallas grandes
-  margin: 0 50px; // Centrar un poco en la barra de navegación
+  gap: 8px;
+  padding: 4px 8px;
+  background-color: $color-white;
+  border-radius: 50px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  flex-grow: 1;
+  max-width: 600px;
+  margin: 0 40px;
+  height: 54px;
+  box-sizing: border-box;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &.centered {
+    margin: 0 auto;
+    max-width: 700px;
+    flex-grow: 0;
+    width: 100%;
+
+    mat-form-field:first-of-type {
+      border-right-color: transparent;
+      padding-right: 0;
+    }
+  }
 
   mat-form-field {
-    // Estilos generales para los campos de formulario
-    width: auto; // Deja que el contenido determine el ancho, o puedes dar un ancho específico si lo prefieres
     margin: 0;
-    background-color: transparent; // Importante para que el fondo blanco de la barra de búsqueda se vea
-    font-family: $font-family-secondary; // Usa tu fuente secundaria para los inputs
+    background-color: transparent;
+    font-family: $font-family-secondary;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-    // Overrides específicos para Angular Material para quitar el fondo y padding por defecto
-    ::ng-deep .mat-form-field-wrapper {
-      padding-bottom: 0 !important;
-      margin-top: 0 !important; // Quita el margen superior por defecto de mat-form-field
+    &.hidden {
+      opacity: 0;
+      visibility: hidden;
+      width: 0 !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      overflow: hidden;
+      pointer-events: none;
     }
 
-    ::ng-deep .mat-form-field-flex {
-      background: transparent !important; // Fondo transparente para el área flexible
-      padding-top: 0 !important; // Elimina el padding superior
-      padding-bottom: 0 !important; // Elimina el padding inferior
-    }
+    ::ng-deep {
+      .mat-form-field-wrapper, .mat-mdc-text-field-wrapper {
+        padding-bottom: 0 !important;
+        margin-top: 0 !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        min-height: unset !important;
+        height: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+      }
 
-    ::ng-deep .mat-form-field-infix {
-      padding: 1px 0 !important; // Ajusta el padding interno del input
-      border-top: none !important; // Elimina bordes superiores que puedan aparecer
-    }
+      .mat-form-field-flex, .mat-mdc-form-field-flex {
+        background: transparent !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        align-items: center !important;
+      }
 
-    ::ng-deep .mat-form-field-underline {
-      display: none; // Oculta la línea inferior por defecto
-    }
+      .mat-form-field-infix, .mat-mdc-form-field-infix {
+        padding: 4px 0 !important;
+        border-top: none !important;
+        min-height: unset !important;
+        width: 100% !important;
+      }
 
-    ::ng-deep .mat-form-field-appearance-fill .mat-form-field-underline::before {
-      background-color: transparent !important; // Elimina el color de la línea de relleno
-    }
+      .mat-form-field-underline, .mdc-line-ripple, .mat-mdc-form-field-focus-indicator {
+        display: none !important;
+      }
 
-    // Estilo para el placeholder y el texto del input
-    input.mat-input-element {
-      color: $color-navy-blue; // Color del texto del input
-      &::placeholder {
-        color: $color-soft-gray; // Color del placeholder
-        opacity: 1; /* Firefox */
+      .mat-form-field-appearance-fill .mat-form-field-underline::before {
+        background-color: transparent !important;
+      }
+
+      .mat-mdc-form-field-subscript-wrapper {
+        display: none !important;
+      }
+
+      // Datepicker button adjustment
+      .mat-datepicker-toggle {
+        button {
+          width: 32px !important;
+          height: 32px !important;
+          padding: 0 !important;
+          display: inline-flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+        }
       }
     }
 
-    // Estilo para los íconos de prefijo
-    mat-icon[matPrefix] {
-      color: $color-soft-gray; // Color de los íconos
-      margin-right: 8px; // Espacio entre el ícono y el texto
-      font-size: 20px; // Tamaño del ícono
-      width: 20px; // Ancho del ícono
-      height: 20px; // Alto del ícono
+    // Input style adjustments
+    input.mat-input-element, input.mat-mdc-input-element {
+      color: $color-navy-blue;
+      font-size: 15px;
+      font-weight: 500;
+      border: none !important;
+      outline: none !important;
+      box-shadow: none !important;
+      background: transparent !important;
+      
+      &::placeholder {
+        color: $color-soft-gray;
+        opacity: 1;
+      }
+    }
+
+    // Prefix icons adjustment
+    mat-icon[matPrefix], .mat-mdc-form-field-icon-prefix {
+      color: $color-soft-gray;
+      margin-right: 6px;
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 
-  // Estilos específicos para el campo de búsqueda de lugares
-  mat-form-field:first-child {
-    border-right: 2px solid $color-soft-gray; // Separador vertical como en la primera imagen
-    padding-right: 15px; // Espacio antes del borde
+  mat-form-field:first-of-type {
+    flex: 1;
+    border-right: 1px solid rgba($color-soft-gray, 0.4);
+    padding-right: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  // Estilos específicos para el campo de fecha
-  mat-form-field:nth-child(2) {
-    // Si quieres un borde a la izquierda de la fecha, úsalo aquí
-    // border-left: 1px solid $color-soft-gray;
-    padding-left: 8px; // Espacio después del borde del primer campo
+  mat-form-field:nth-of-type(2) {
+    width: 160px;
+    padding-left: 12px;
   }
-
 
   button[type="submit"] {
-    border-radius: 50px; // Muy redondeado
-    padding: 8px 20px; // Ajusta el padding para que sea más compacto
-    background-color: $color-sand-yellow; // Usa tu color Sand Yellow
-    color: $color-navy-blue; // Texto oscuro en el botón
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15); // Sombra más pronunciada
-    font-weight: $font-weight-h2; // Un poco más audaz
-    font-family: $font-family-primary; // Usa tu fuente primaria para el botón
+    border-radius: 50px;
+    padding: 0 24px;
+    height: 40px;
+    border: none;
+    outline: none;
+    background-color: $color-sand-yellow;
+    color: $color-navy-blue;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    font-weight: $font-weight-h2;
+    font-family: $font-family-primary;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
     transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 
     &:hover {
-      background-color: darken($color-sand-yellow, 10%); // Oscurece al pasar el ratón
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    mat-icon {
-      color: $color-navy-blue; // Color del ícono si añades uno al botón
+      background-color: darken($color-sand-yellow, 10%);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     }
   }
 }
 
 .nav-links {
   display: flex;
-  gap: 16px; // Espacio entre los íconos de navegación
-  margin-right: 24px; // Espacio a la derecha de los íconos de navegación
+  gap: 24px;
+  margin-right: 24px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &.hidden {
+    opacity: 0;
+    visibility: hidden;
+    width: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
 
   a {
-    color: $color-navy-blue; // Color de los íconos de navegación
+    color: $color-navy-blue;
     transition: color 0.2s ease-in-out;
     &:hover {
-      color: $color-light-blue; // Color al pasar el ratón
+      color: $color-light-blue;
     }
     mat-icon {
-      font-size: 24px; // Tamaño de los íconos
+      font-size: 24px;
       width: 24px;
       height: 24px;
     }
   }
 
-  // Estilo para el link activo si lo necesitas
   .active-link {
-    color: $color-light-blue; // Ejemplo: color diferente para el link activo
+    color: $color-light-blue;
   }
 }
 
 app-language-switcher {
-  margin-right: 16px; // Espacio a la derecha del selector de idioma
+  display: inline-flex;
+  align-items: center;
+  margin-right: 36px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &.hidden {
+    opacity: 0;
+    visibility: hidden;
+    width: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
 }
 
 button[mat-icon-button][aria-label="User options"] {
-  color: $color-navy-blue; // Color del ícono de usuario
+  color: $color-navy-blue;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px !important;
+  height: 48px !important;
+  padding: 0 !important;
+  
   mat-icon {
-    font-size: 32px; // Ícono de usuario un poco más grande
+    font-size: 32px;
     width: 32px;
     height: 32px;
+  }
+
+  &.hidden {
+    opacity: 0;
+    visibility: hidden;
+    width: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    pointer-events: none;
   }
 }
 

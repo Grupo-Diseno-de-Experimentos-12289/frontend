@@ -70,3 +70,10 @@ body, p, span, label, input {
   font-size: 12px;
   font-weight: 400;
 }
+
+.mat-mdc-menu-panel, .mat-menu-panel, .mat-datepicker-content, .mat-calendar, .mat-calendar-content {
+  background-color: #FFFFFF !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1) !important;
+  border-radius: 8px !important;
+}
+

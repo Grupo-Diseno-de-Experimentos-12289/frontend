@@ -31,6 +31,10 @@
                     <mat-icon matListItemIcon>home</mat-icon>
                     <span matListItemTitle>{{ 'NAV.HOME' | translate }}</span>
                 </a>
+                <a mat-list-item routerLink="/itinerary" (click)="close()" routerLinkActive="active-sidenav-link">
+                    <mat-icon matListItemIcon>event_note</mat-icon>
+                    <span matListItemTitle>{{ 'NAV.ITINERARY' | translate }}</span>
+                </a>
                 <a mat-list-item routerLink="/experiences" (click)="close()" routerLinkActive="active-sidenav-link">
                     <mat-icon matListItemIcon>travel_explore</mat-icon>
                     <span matListItemTitle>{{ 'NAV.EXPERIENCES' | translate }}</span>

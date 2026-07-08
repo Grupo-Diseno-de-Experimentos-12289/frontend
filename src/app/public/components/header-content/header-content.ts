@@ -15,7 +15,8 @@ import {LanguageSwitcher} from '../language-switcher/language-switcher';
 import {TranslateModule} from '@ngx-translate/core';
 import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
-import {AuthService} from '../../../iam/services/auth.service';
+import { AuthService } from '../../../iam/services/auth.service';
+import { FilterStateService } from '../../services/filter-state.service';
 
 @Component({
   selector: 'app-header-content',
@@ -51,12 +52,14 @@ export class HeaderContent implements OnInit {
   searchForm: FormGroup;
   filteredOptions: string[] = [];
   allOptions: string[] = [];
+  showFilters = false;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
     private authenticationService: AuthService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private filterStateService: FilterStateService
   ) {
     this.searchForm = this.fb.group({
       query: [''],
@@ -74,7 +77,7 @@ export class HeaderContent implements OnInit {
       });
     this.authenticationService.isSignedIn.subscribe(flag => this.isSignedIn = flag);
     this.authenticationService.currentUserMail.subscribe(email => this.currentEmail = email);
-    // Simular opciones (reemplazar con llamadas reales)
+    this.filterStateService.showFilters$.subscribe(val => this.showFilters = val);
     this.allOptions = ['Cusco', 'Arequipa', 'Paracas', 'Montaña de 7 colores', 'Sandboarding'];
 
     this.searchForm.get('query')!.valueChanges.subscribe(value => {

@@ -20,7 +20,7 @@ export class Favorites implements OnInit {
   isLoading = true;
   currentPage = 1;
 
-  userId: number = JSON.parse(localStorage.getItem('user') || '{}').profileId || 1;
+  userId: number = Number(localStorage.getItem('userId')) || 1;
 
   constructor(
     private favoriteService: FavoriteService,

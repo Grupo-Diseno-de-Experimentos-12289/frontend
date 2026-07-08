@@ -10,7 +10,7 @@ export const authGuard: CanActivateFn = () => {
     take(1),
     map(isSignedIn => {
       const token = localStorage.getItem('token');
-      if (isSignedIn && token && auth.isRole('ROLE_TOURIST')) return true;
+      if (isSignedIn && token && (auth.isRole('ROLE_TOURIST') || auth.isRole('ROLE_ADMIN'))) return true;
       router.navigate(['/sign-in']).then();
       return false;
     })

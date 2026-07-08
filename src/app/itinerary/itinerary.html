@@ -1,0 +1,128 @@
+<div class="itinerary-page-container">
+  <header class="page-header">
+    <h1>Personalized Itinerary Generator</h1>
+    <p class="subtitle">Select your destination, interests and length of stay to get a personalized day-by-day travel plan.</p>
+  </header>
+
+  <div class="generator-grid">
+    <!-- Configuration Form -->
+    <section class="config-card">
+      <h2>Configure Your Trip</h2>
+      <p class="section-desc">Select your destination, length of stay, and activities you are interested in.</p>
+
+      <div class="form-group">
+        <label for="destination">Where are you going?</label>
+        <div class="select-wrapper">
+          <mat-icon class="select-icon">place</mat-icon>
+          <select id="destination" [(ngModel)]="selectedDestinationId">
+            <option *ngFor="let dest of destinations" [value]="dest.id">
+              {{ getDestinationLabel(dest) }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="days">How many days? (1 - 10)</label>
+        <div class="input-wrapper">
+          <mat-icon class="input-icon">calendar_today</mat-icon>
+          <input 
+            type="number" 
+            id="days" 
+            min="1" 
+            max="10" 
+            [(ngModel)]="numberOfDays"
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>What are you interested in?</label>
+        <div class="categories-chips-grid">
+          <button 
+            type="button" 
+            *ngFor="let cat of categories" 
+            class="category-chip-btn"
+            [class.selected]="cat.selected"
+            (click)="toggleCategory(cat)"
+          >
+            <mat-icon>{{ cat.icon }}</mat-icon>
+            <span>{{ cat.label }}</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="error-msg-box" *ngIf="error">
+        <mat-icon>error_outline</mat-icon>
+        <span>{{ error }}</span>
+      </div>
+
+      <button 
+        class="btn-generate" 
+        [disabled]="loading" 
+        (click)="generateItinerary()"
+      >
+        <mat-icon *ngIf="!loading">auto_awesome</mat-icon>
+        <span>{{ loading ? 'Generating your plan...' : 'Generate Itinerary' }}</span>
+      </button>
+    </section>
+
+    <!-- Itinerary Results -->
+    <section class="results-container">
+      <div class="empty-state" *ngIf="!itinerary && !loading">
+        <div class="empty-icon-wrapper">
+          <mat-icon>route</mat-icon>
+        </div>
+        <h3>No itinerary generated yet</h3>
+        <p>Fill out the configuration panel and hit "Generate Itinerary" to map your adventure step-by-step.</p>
+      </div>
+
+      <div class="loading-state" *ngIf="loading">
+        <div class="spinner-ring"></div>
+        <h3>Curating your personalized experience...</h3>
+        <p>We are matching top experiences based on your categories and destination availability.</p>
+      </div>
+
+      <div class="itinerary-details" *ngIf="itinerary && !loading">
+        <div class="results-header">
+          <mat-icon class="success-icon">verified_user</mat-icon>
+          <div>
+            <h3>Your Personalized Plan is Ready!</h3>
+            <p>{{ itinerary.numberOfDays }} days mapped out for you</p>
+          </div>
+        </div>
+
+        <div class="days-timeline">
+          <div class="timeline-day-card" *ngFor="let day of itinerary.days">
+            <div class="day-number-badge">Day {{ day.dayNumber }}</div>
+            
+            <div class="activities-list">
+              <div class="empty-day-message" *ngIf="day.activities.length === 0">
+                <mat-icon>info_outline</mat-icon>
+                <span>No activities scheduled for this day matching your categories.</span>
+              </div>
+
+              <div class="activity-timeline-item" *ngFor="let act of day.activities">
+                <div class="timeline-dot"></div>
+                <div class="activity-card-body">
+                  <div class="activity-meta">
+                    <span class="category-tag">{{ act.category }}</span>
+                    <span class="duration-badge">
+                      <mat-icon>schedule</mat-icon>
+                      {{ act.duration }}
+                    </span>
+                  </div>
+                  <h4>{{ act.title }}</h4>
+                  <div class="meeting-point-row">
+                    <mat-icon>place</mat-icon>
+                    <span>Meeting point: {{ act.meetingPoint }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

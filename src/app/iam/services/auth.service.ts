@@ -103,8 +103,9 @@ export class AuthService {
           localStorage.setItem('email', response.email);
           localStorage.setItem('token', response.token);
           localStorage.setItem('roles', JSON.stringify(response.roles));
+          localStorage.setItem('userId', response.id.toString());
           console.log(`Signed in as ${response.email} with token ${response.token} and roles ${response.roles}`);
-          if (response.roles.includes('ROLE_TOURIST')) {
+          if (response.roles.includes('ROLE_TOURIST') || response.roles.includes('ROLE_ADMIN')) {
             this.router.navigate(['/home']).then();
           } else if (response.roles.includes('ROLE_AGENCY_STAFF')) {
             this.router.navigate(['/agency/home']).then();

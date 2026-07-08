@@ -21,6 +21,11 @@ export const routes: Routes = [
             .then(m => m.ExperienceDetailComponent)
       },
       {
+        path: 'itinerary',
+        loadComponent: () =>
+          import('./itinerary/itinerary.component').then(m => m.ItineraryComponent)
+      },
+      {
         path: 'favorites',
         loadComponent: () => import('./favorites/pages/favorites/favorites').then(m => m.Favorites)
       },

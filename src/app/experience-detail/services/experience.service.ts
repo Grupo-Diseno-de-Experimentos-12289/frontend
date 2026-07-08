@@ -10,6 +10,7 @@ export interface Experience {
   description: string;
   duration: string;
   meetingPoint: string;
+  agencyId: number;
 }
 
 @Injectable({

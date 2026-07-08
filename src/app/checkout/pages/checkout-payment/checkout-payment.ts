@@ -46,8 +46,12 @@ export class CheckoutPayment implements OnInit {
   payNow(): void {
     if (this.form.invalid || !this.item) return;
 
-    this.bookingService.confirm(this.item);
-    this.cartService.remove(this.item.id);
-    this.router.navigate(['/checkout/success']).then();
+    this.bookingService.confirm(this.item).subscribe({
+      next: () => {
+        this.cartService.remove(this.item!.id);
+        this.router.navigate(['/checkout/success']).then();
+      },
+      error: (err) => console.error('Booking confirmation failed', err)
+    });
   }
 }

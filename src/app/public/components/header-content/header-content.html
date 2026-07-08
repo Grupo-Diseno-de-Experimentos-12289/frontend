@@ -1,4 +1,4 @@
-<mat-toolbar>
+<mat-toolbar [class.filters-active]="showFilters">
   @if (isMobile) {
     <button
       mat-icon-button
@@ -22,7 +22,7 @@
 
 
   @if (!isMobile) {
-    <form class="search-bar" (ngSubmit)="onSearch()" [formGroup]="searchForm">
+    <form class="search-bar" (ngSubmit)="onSearch()" [formGroup]="searchForm" [class.centered]="showFilters">
       <mat-form-field appearance="fill">
         <mat-icon matPrefix>search</mat-icon>
         <input
@@ -39,7 +39,7 @@
         </mat-autocomplete>
       </mat-form-field>
 
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="fill" [class.hidden]="showFilters">
         <mat-icon matPrefix>calendar_today</mat-icon>
         <input
           matInput
@@ -68,11 +68,13 @@
     </button>
   }
 
-  <span class="spacer"></span>
+  <span class="spacer" [class.hidden]="showFilters"></span>
 
-  <!-- Navigation -->
   @if(!isMobile){
-    <div class="nav-links">
+    <div class="nav-links" [class.hidden]="showFilters">
+      <a mat-button routerLink="/itinerary" routerLinkActive="active-link" title="Personalized Itinerary">
+        <mat-icon>event_note</mat-icon>
+      </a>
       <a mat-button routerLink="/favorites" routerLinkActive="active-link">
         <mat-icon>favorite</mat-icon>
       </a>
@@ -85,12 +87,10 @@
     </div>
   }
 
-  <!-- Language Switcher Component -->
-  <app-language-switcher />
+  <app-language-switcher [class.hidden]="showFilters" />
 
   @if(!isMobile) {
-    <!-- User Profile Menu -->
-    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="User options">
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="User options" [class.hidden]="showFilters">
       <mat-icon>account_circle</mat-icon>
     </button>
     <mat-menu #menu="matMenu">

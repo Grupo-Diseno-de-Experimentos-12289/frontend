@@ -1,0 +1,46 @@
+@use '../../../../styles/variables' as *;
+
+.lang-btn {
+  color: $color-navy-blue;
+  transition: color 0.2s ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    color: $color-light-blue;
+  }
+
+  mat-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.lang-menu-content {
+  padding: 8px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $color-white;
+
+  mat-button-toggle-group {
+    border: 1px solid rgba($color-soft-gray, 0.4);
+    border-radius: 8px;
+    background-color: transparent;
+    overflow: hidden;
+
+    mat-button-toggle {
+      font-family: $font-family-primary;
+      font-weight: 600;
+      color: $color-navy-blue;
+      background-color: transparent;
+
+      &.mat-button-toggle-checked {
+        background-color: $color-light-beige;
+        color: $color-navy-blue;
+      }
+    }
+  }
+}

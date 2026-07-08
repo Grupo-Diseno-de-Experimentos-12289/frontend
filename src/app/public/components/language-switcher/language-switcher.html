@@ -1,8 +1,15 @@
-<mat-button-toggle-group [value]="currentLang" appearance="standard" aria-label="Preferred Language" name="language">
-  @for (language of languages; track language) {
-    <mat-button-toggle (click)="useLanguage(language)"
-                       [aria-label]="language"
-                       [value]="language">{{ language.toUpperCase() }}
-    </mat-button-toggle>
-  }
-</mat-button-toggle-group>
+<button mat-icon-button [matMenuTriggerFor]="langMenu" aria-label="Switch Language" class="lang-btn">
+  <mat-icon>language</mat-icon>
+</button>
+<mat-menu #langMenu="matMenu">
+  <div class="lang-menu-content" (click)="$event.stopPropagation()">
+    <mat-button-toggle-group [value]="currentLang" appearance="standard" aria-label="Preferred Language" name="language">
+      @for (language of languages; track language) {
+        <mat-button-toggle (click)="useLanguage(language)"
+                           [aria-label]="language"
+                           [value]="language">{{ language.toUpperCase() }}
+        </mat-button-toggle>
+      }
+    </mat-button-toggle-group>
+  </div>
+</mat-menu>
