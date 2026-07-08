@@ -37,5 +37,48 @@
     "FAQ": "FAQ",
     "SALES_SUPPORT": "Sales support",
     "RIGHTS_RESERVED": "All rights reserved"
+  },
+  "PROFILE": {
+    "TITLE": "Profile settings",
+    "DESCRIPTION": "Manage your account, preferences, and personal details",
+    "FIRST_NAME": "First name",
+    "LAST_NAME": "Last name",
+    "PHONE": "Mobile phone",
+    "EMAIL": "Email address",
+    "TYPE": "Traveler profile type",
+    "TYPE_UNDEFINED": "Not defined (setup required)",
+    "TYPE_STANDARD": "Standard tourist (personalized recommendations)",
+    "TYPE_CORPORATE": "Corporate traveler (business agenda & schedule)",
+    "SAVE_SUCCESS": "Profile updated successfully!",
+    "CHANGE_PHOTO": "Change photo",
+    "SAVE": "Save changes"
+  },
+  "RECOMMENDATIONS": {
+    "TITLE": "Recommendations",
+    "DESCRIPTION": "Personalized travel experiences based on your profile",
+    "CONFIGURE_PROMPT": "Please configure your traveler profile type to unlock personalized recommendations.",
+    "GO_TO_PROFILE": "Go to profile settings",
+    "STANDARD_TITLE": "Filtered experiences for you",
+    "CORPORATE_TITLE": "Business agenda recommendations",
+    "CORPORATE_DESC": "Plan experiences that fit perfectly within your business travel schedules.",
+    "SEARCH_TITLE": "Find experiences for your corporate schedule",
+    "BUSINESS_LOCATION": "Business location",
+    "DATE_WINDOW_START": "Business event start date/time",
+    "DATE_WINDOW_END": "Business event end date/time",
+    "SEARCH_RECOMMENDATIONS": "Search recommendations",
+    "LOADING": "Loading recommendations...",
+    "NO_RESULTS": "No experiences match your business agenda for this period. Try extending your time window or changing the location."
+  },
+  "CART": {
+    "TITLE": "Shopping cart",
+    "DESCRIPTION": "Review and manage the experiences you plan to book"
+  },
+  "FAVORITES": {
+    "TITLE": "My favorites",
+    "DESCRIPTION": "Your saved experiences and destinations to explore later"
+  },
+  "BOOKINGS": {
+    "TITLE": "My bookings",
+    "DESCRIPTION": "Track your upcoming and past confirmed experiences"
   }
 }

@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { TranslateModule } from '@ngx-translate/core';
+import { environment } from '../../../../environments/environment';
+import { AuthService } from '../../../iam/services/auth.service';
 import { ExperienceService } from '../../../experience-detail/services/experience.service';
 import { ItineraryService, Destination } from '../../../bookings/services/itinerary.service';
 import { FavoriteService } from '../../../experience-detail/services/favorite.service';
@@ -12,12 +17,20 @@ import { toDisplayData } from '../../../public/components/experience-card/experi
 @Component({
   selector: 'app-recommendations',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatIconModule, MatButtonModule, ExperienceCard],
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    MatIconModule,
+    MatButtonModule,
+    TranslateModule,
+    ExperienceCard
+  ],
   templateUrl: './recommendations.html',
   styleUrl: './recommendations.scss'
 })
 export class RecommendationsComponent implements OnInit {
-  userId: number = Number(localStorage.getItem('userId')) || 1;
+  userId = 0;
   destinations: Destination[] = [];
   categories: string[] = ['Adventure', 'Nature', 'Gastronomy', 'Culture', 'Historical'];
   
@@ -30,25 +43,33 @@ export class RecommendationsComponent implements OnInit {
   corporateProfileSet = false;
   isLoading = false;
   errorMessage = '';
-  profileType = 'tourist';
+  profileType = 'UNDEFINED';
 
   recommendations: any[] = [];
   displayRecs: ExperienceCardData[] = [];
   generalExperiences: ExperienceCardData[] = [];
 
   constructor(
+    private authService: AuthService,
+    private http: HttpClient,
     private experienceService: ExperienceService,
     private itineraryService: ItineraryService,
     private favoriteService: FavoriteService
   ) {}
 
   ngOnInit(): void {
-    this.profileType = localStorage.getItem('profileType') || 'tourist';
+    this.authService.currentUserId.subscribe(id => {
+      if (id) {
+        this.userId = id;
+        this.loadUserProfile();
+      } else {
+        this.profileType = 'UNDEFINED';
+      }
+    });
 
-    // 1. Fetch destinations, deduplicating by city+country
+    // Fetch destinations, deduplicating by city+country
     this.itineraryService.getDestinations().subscribe({
       next: (dests) => {
-        // Deduplicate by city+country so the dropdown shows clean options
         const seen = new Set<string>();
         this.destinations = dests.filter(dest => {
           const key = `${dest.city}-${dest.country}`;
@@ -63,14 +84,27 @@ export class RecommendationsComponent implements OnInit {
       error: (err) => console.error('Failed to load destinations:', err)
     });
 
-    // 2. Pre-populate time windows with reasonable corporate agenda defaults (e.g. today and tomorrow)
+    // Pre-populate time windows with reasonable corporate agenda defaults (e.g. today and tomorrow)
     const today = new Date();
     this.windowStart = new Date(today.setHours(9, 0, 0, 0)).toISOString().substring(0, 16);
     const tomorrow = new Date(today.setDate(today.getDate() + 1));
     this.windowEnd = new Date(tomorrow.setHours(18, 0, 0, 0)).toISOString().substring(0, 16);
 
-    // 3. Load general experiences to display as suggestions initially
+    // Load general experiences
     this.loadGeneralRecommendations();
+  }
+
+  loadUserProfile(): void {
+    this.http.get<any>(`${environment.serverBasePath}/users/${this.userId}`).subscribe({
+      next: (user) => {
+        this.profileType = user.profileType || 'UNDEFINED';
+        localStorage.setItem('profileType', this.profileType);
+      },
+      error: (err) => {
+        console.error('Failed to load user profile in recommendations:', err);
+        this.profileType = localStorage.getItem('profileType') || 'UNDEFINED';
+      }
+    });
   }
 
   loadGeneralRecommendations(): void {
@@ -102,7 +136,6 @@ export class RecommendationsComponent implements OnInit {
 
     const interests = Object.keys(this.selectedCategories).filter(k => this.selectedCategories[k]);
 
-    // Backend expects LocalDateTime format: 2026-07-08T09:00:00 (no Z, no ms)
     const toLocalDT = (isoStr: string) => {
       const d = new Date(isoStr);
       return d.toISOString().replace('Z', '').split('.')[0];
@@ -118,7 +151,6 @@ export class RecommendationsComponent implements OnInit {
     ).subscribe({
       next: (recs) => {
         this.recommendations = recs;
-        // Transform the backend CorporateRecommendationResource to display formats
         this.displayRecs = recs.map((r, index) => {
           const display = toDisplayData({
             id: r.experienceId,
@@ -129,7 +161,6 @@ export class RecommendationsComponent implements OnInit {
             agencyId: 1
           }, index);
           
-          // Inject matching slot count
           if (r.matchingAvailabilities && r.matchingAvailabilities.length > 0) {
             display.durationLabel = `${display.durationLabel} • ${r.matchingAvailabilities.length} matching slot(s)`;
           }

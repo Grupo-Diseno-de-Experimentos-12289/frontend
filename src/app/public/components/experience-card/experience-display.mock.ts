@@ -20,7 +20,7 @@ export const CATEGORY_TABS: CategoryTab[] = [
 // placeholder images (no hay assets de fotografía real en el proyecto)
 const PLACEHOLDER_IMAGES = [
   'https://images.unsplash.com/photo-1526392060635-9d6019884377?auto=format&fit=crop&w=800&q=80',
-  'https://images.unsplash.com/photo-1550951298-6bd0d47a1a4c?auto=format&fit=crop&w=800&q=80',
+  'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80',
   'https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=800&q=80',
   'https://images.unsplash.com/photo-1518259102261-b40117eabbc9?auto=format&fit=crop&w=800&q=80',
   'https://images.unsplash.com/photo-1531065208531-4036c0dba3ca?auto=format&fit=crop&w=800&q=80',

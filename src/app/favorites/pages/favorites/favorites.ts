@@ -6,12 +6,14 @@ import { ExperienceService } from '../../../experience-detail/services/experienc
 import { ExperienceCard, ExperienceCardData } from '../../../public/components/experience-card/experience-card';
 import { toDisplayData } from '../../../public/components/experience-card/experience-display.mock';
 
+import { TranslateModule } from '@ngx-translate/core';
+
 const PAGE_SIZE = 3;
 
 @Component({
   selector: 'app-favorites',
   standalone: true,
-  imports: [CommonModule, ExperienceCard],
+  imports: [CommonModule, ExperienceCard, TranslateModule],
   templateUrl: './favorites.html',
   styleUrl: './favorites.scss'
 })

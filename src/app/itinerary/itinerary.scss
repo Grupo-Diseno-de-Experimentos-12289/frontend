@@ -17,22 +17,6 @@ $font-family-secondary: 'Inter', sans-serif;
 
 .page-header {
   margin-bottom: 32px;
-
-  h1 {
-    font-family: $font-family-primary;
-    color: $color-navy-blue;
-    font-size: 28px;
-    font-weight: 700;
-    margin: 0 0 6px 0;
-  }
-
-  .subtitle {
-    font-family: $font-family-secondary;
-    color: $color-soft-gray;
-    font-size: 14px;
-    margin: 0;
-    line-height: 1.5;
-  }
 }
 
 .generator-grid {

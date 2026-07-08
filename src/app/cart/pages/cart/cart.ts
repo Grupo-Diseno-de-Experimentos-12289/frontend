@@ -5,6 +5,8 @@ import { CartItem, CartService } from '../../services/cart.service';
 import { TripItemCard } from '../../components/trip-item-card/trip-item-card';
 import { MatIcon } from '@angular/material/icon';
 
+import { TranslateModule } from '@ngx-translate/core';
+
 interface CartGroup {
   date: string;
   label: string;
@@ -14,7 +16,7 @@ interface CartGroup {
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CommonModule, TripItemCard, MatIcon],
+  imports: [CommonModule, TripItemCard, MatIcon, TranslateModule],
   templateUrl: './cart.html',
   styleUrl: './cart.scss'
 })

@@ -1,5 +1,8 @@
 <div class="cart-page">
-  <h1>Cart ({{ items.length }} {{ items.length === 1 ? 'item' : 'items' }})</h1>
+  <div class="page-header">
+    <h1>{{ 'CART.TITLE' | translate }} ({{ items.length }} {{ items.length === 1 ? 'item' : 'items' }})</h1>
+    <p class="subtitle">{{ 'CART.DESCRIPTION' | translate }}</p>
+  </div>
 
   @if (items.length === 0) {
     <p class="empty">Your cart is empty.</p>

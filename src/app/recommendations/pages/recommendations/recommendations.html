@@ -1,27 +1,78 @@
 <div class="recommendations-container">
-  <header class="page-header">
-    <h1>{{ profileType === 'corporate' ? 'Business Travel Recommendations' : 'Personalized Recommendations' }}</h1>
-    <p class="subtitle">
-      {{ profileType === 'corporate' 
-         ? 'Optimize your business schedule: discover experiences that perfectly fit into your free time windows.' 
-         : 'Explore curated travel recommendations handpicked for your tourist preferences.' }}
-    </p>
-  </header>
+  <div class="page-header">
+    <h1>{{ 'RECOMMENDATIONS.TITLE' | translate }}</h1>
+    <p class="subtitle">{{ 'RECOMMENDATIONS.DESCRIPTION' | translate }}</p>
+  </div>
 
-  <!-- If Corporate, show 2-column layout (Agenda configuration + Results) -->
-  <div class="main-grid" *ngIf="profileType === 'corporate'">
+  <!-- STATE 1: UNDEFINED (Setup Required) -->
+  <div *ngIf="profileType === 'UNDEFINED'" class="setup-required-container">
+    <div class="results-header banner-gray">
+      <mat-icon>warning</mat-icon>
+      <div>
+        <h3>{{ 'PROFILE.TYPE_UNDEFINED' | translate }}</h3>
+        <p>{{ 'RECOMMENDATIONS.CONFIGURE_PROMPT' | translate }}</p>
+      </div>
+    </div>
+    <div class="setup-actions">
+      <a routerLink="/profile" class="btn-primary-cta">
+        <mat-icon>manage_accounts</mat-icon>
+        {{ 'RECOMMENDATIONS.GO_TO_PROFILE' | translate }}
+      </a>
+    </div>
+
+    <!-- Fallback general experiences suggestion list -->
+    <div class="fallback-suggestions">
+      <h3 class="section-title">{{ 'RECOMMENDATIONS.STANDARD_TITLE' | translate }}</h3>
+      <div class="experiences-grid">
+        <app-experience-card 
+          *ngFor="let card of generalExperiences" 
+          [data]="card"
+          (favoriteToggle)="onFavoriteToggle($event)"
+        ></app-experience-card>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATE 2: STANDARD (Standard Tourist curated list) -->
+  <div *ngIf="profileType === 'STANDARD'" class="tourist-recommendations-layout">
+    <div class="results-header banner-blue">
+      <mat-icon>star</mat-icon>
+      <div>
+        <h3>{{ 'RECOMMENDATIONS.STANDARD_TITLE' | translate }}</h3>
+        <p>{{ 'PROFILE.TYPE_STANDARD' | translate }}</p>
+      </div>
+    </div>
+
+    <section class="results-panel">
+      <div class="loading-state" *ngIf="isLoading">
+        <mat-icon class="spinner">sync</mat-icon>
+        <p>{{ 'RECOMMENDATIONS.LOADING' | translate }}</p>
+      </div>
+
+      <div class="experiences-grid" *ngIf="!isLoading">
+        <app-experience-card 
+          *ngFor="let card of generalExperiences" 
+          [data]="card"
+          (favoriteToggle)="onFavoriteToggle($event)"
+        ></app-experience-card>
+      </div>
+    </section>
+  </div>
+
+  <!-- STATE 3: CORPORATE (Business agenda configuration panel & results list) -->
+  <div class="main-grid" *ngIf="profileType === 'CORPORATE'">
     <!-- Configuration Panel -->
     <section class="agenda-card">
       <div class="card-header-row">
-        <h2>Your Work Agenda</h2>
+        <h2>{{ 'RECOMMENDATIONS.SEARCH_TITLE' | translate }}</h2>
         <button mat-button class="btn-reset" *ngIf="corporateProfileSet" (click)="resetAgenda()">
-          <mat-icon>restart_alt</mat-icon> Clear Agenda
+          <mat-icon>restart_alt</mat-icon>
         </button>
       </div>
-      <p class="section-desc">Define your location and business free time windows to get compatible suggestions.</p>
+      <p class="section-desc">{{ 'RECOMMENDATIONS.CORPORATE_DESC' | translate }}</p>
 
       <div class="form-group">
-        <label for="destination">Business Location</label>
+        <label for="destination">{{ 'RECOMMENDATIONS.BUSINESS_LOCATION' | translate }}</label>
         <div class="select-wrapper">
           <mat-icon class="select-icon">place</mat-icon>
           <select id="destination" [(ngModel)]="selectedDestinationId" [disabled]="corporateProfileSet">
@@ -49,7 +100,7 @@
       </div>
 
       <div class="form-group">
-        <label for="start-time">Free Time Start</label>
+        <label for="start-time">{{ 'RECOMMENDATIONS.DATE_WINDOW_START' | translate }}</label>
         <div class="input-wrapper">
           <mat-icon class="input-icon">today</mat-icon>
           <input 
@@ -62,7 +113,7 @@
       </div>
 
       <div class="form-group">
-        <label for="end-time">Free Time End</label>
+        <label for="end-time">{{ 'RECOMMENDATIONS.DATE_WINDOW_END' | translate }}</label>
         <div class="input-wrapper">
           <mat-icon class="input-icon">event</mat-icon>
           <input 
@@ -81,7 +132,7 @@
         (click)="applyCorporateAgenda()"
       >
         <mat-icon *ngIf="!isLoading">filter_alt</mat-icon>
-        <span *ngIf="!isLoading">Find Compatible Experiences</span>
+        <span *ngIf="!isLoading">{{ 'RECOMMENDATIONS.SEARCH_RECOMMENDATIONS' | translate }}</span>
         <span *ngIf="isLoading">Filtering Schedule...</span>
       </button>
 
@@ -93,7 +144,7 @@
       <!-- State 1: Loading -->
       <div class="loading-state" *ngIf="isLoading">
         <mat-icon class="spinner">sync</mat-icon>
-        <p>Analyzing schedule compatibilities...</p>
+        <p>{{ 'RECOMMENDATIONS.LOADING' | translate }}</p>
       </div>
 
       <!-- State 2: Personalized Corporate Recs -->
@@ -106,7 +157,7 @@
         <div class="no-results" *ngIf="displayRecs.length === 0">
           <mat-icon class="no-results-icon">business_center</mat-icon>
           <h4>No compatible experiences found</h4>
-          <p>We couldn't find experiences that fit this schedule and location. Try widening your free time window or selecting more categories.</p>
+          <p>{{ 'RECOMMENDATIONS.NO_RESULTS' | translate }}</p>
         </div>
 
         <div class="experiences-grid" *ngIf="displayRecs.length > 0">
@@ -118,7 +169,7 @@
         </div>
       </ng-container>
 
-      <!-- State 3: General Recommendations (No profile configured yet) -->
+      <!-- State 3: General Recommendations (Before filtering) -->
       <ng-container *ngIf="!isLoading && !corporateProfileSet">
         <div class="results-header banner-blue">
           <mat-icon>info</mat-icon>
@@ -136,32 +187,6 @@
           ></app-experience-card>
         </div>
       </ng-container>
-    </section>
-  </div>
-
-  <!-- If Standard Tourist, show full-width curated layout -->
-  <div class="tourist-recommendations-layout" *ngIf="profileType !== 'corporate'">
-    <div class="results-header banner-blue">
-      <mat-icon>star</mat-icon>
-      <div>
-        <h3>Curated For Your Tourist Profile</h3>
-        <p>You are viewing popular and trending experiences matching your interests. Want to plan around a business schedule? Change your profile type to <strong>Corporate Traveler</strong> in your settings.</p>
-      </div>
-    </div>
-
-    <section class="results-panel">
-      <div class="loading-state" *ngIf="isLoading">
-        <mat-icon class="spinner">sync</mat-icon>
-        <p>Loading curated recommendations...</p>
-      </div>
-
-      <div class="experiences-grid" *ngIf="!isLoading">
-        <app-experience-card 
-          *ngFor="let card of generalExperiences" 
-          [data]="card"
-          (favoriteToggle)="onFavoriteToggle($event)"
-        ></app-experience-card>
-      </div>
     </section>
   </div>
 </div>

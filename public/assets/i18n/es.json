@@ -37,5 +37,48 @@
     "FAQ": "Preguntas frecuentes",
     "SALES_SUPPORT": "Asistencia de ventas",
     "RIGHTS_RESERVED": "Todos los derechos reservados"
+  },
+  "PROFILE": {
+    "TITLE": "Configuración del perfil",
+    "DESCRIPTION": "Administra tu cuenta, tus preferencias y tus datos personales",
+    "FIRST_NAME": "Nombres",
+    "LAST_NAME": "Apellidos",
+    "PHONE": "Teléfono móvil",
+    "EMAIL": "Dirección de correo",
+    "TYPE": "Tipo de perfil de turista",
+    "TYPE_UNDEFINED": "No definido (requiere configuración)",
+    "TYPE_STANDARD": "Turista estándar (recomendaciones personalizadas)",
+    "TYPE_CORPORATE": "Viajero corporativo (agenda y horarios de negocios)",
+    "SAVE_SUCCESS": "¡Perfil actualizado con éxito!",
+    "CHANGE_PHOTO": "Cambiar foto",
+    "SAVE": "Guardar cambios"
+  },
+  "RECOMMENDATIONS": {
+    "TITLE": "Recomendaciones",
+    "DESCRIPTION": "Experiencias de viaje personalizadas según tu perfil",
+    "CONFIGURE_PROMPT": "Por favor, configura tu tipo de perfil de viajero para desbloquear recomendaciones personalizadas.",
+    "GO_TO_PROFILE": "Ir a configuración del perfil",
+    "STANDARD_TITLE": "Experiencias filtradas para ti",
+    "CORPORATE_TITLE": "Recomendaciones de agenda de negocios",
+    "CORPORATE_DESC": "Planifica experiencias que se ajusten perfectamente a tus horarios de viaje de trabajo.",
+    "SEARCH_TITLE": "Encuentra experiencias para tu horario corporativo",
+    "BUSINESS_LOCATION": "Ubicación del evento",
+    "DATE_WINDOW_START": "Fecha/hora de inicio del evento",
+    "DATE_WINDOW_END": "Fecha/hora de fin del evento",
+    "SEARCH_RECOMMENDATIONS": "Buscar recomendaciones",
+    "LOADING": "Cargando recomendaciones...",
+    "NO_RESULTS": "No hay experiencias que coincidan con tu agenda de negocios para este período. Intenta ampliar la ventana de tiempo o cambiar de ubicación."
+  },
+  "CART": {
+    "TITLE": "Carrito de compras",
+    "DESCRIPTION": "Revisa y administra las experiencias que planeas reservar"
+  },
+  "FAVORITES": {
+    "TITLE": "Mis favoritos",
+    "DESCRIPTION": "Tus experiencias y destinos guardados para explorar después"
+  },
+  "BOOKINGS": {
+    "TITLE": "Mis reservas",
+    "DESCRIPTION": "Sigue el estado de tus experiencias confirmadas y pasadas"
   }
 }

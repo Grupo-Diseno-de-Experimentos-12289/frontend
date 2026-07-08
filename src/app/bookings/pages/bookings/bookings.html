@@ -1,5 +1,8 @@
 <div class="bookings-page">
-  <h1>Current bookings</h1>
+  <div class="page-header">
+    <h1>{{ 'BOOKINGS.TITLE' | translate }}</h1>
+    <p class="subtitle">{{ 'BOOKINGS.DESCRIPTION' | translate }}</p>
+  </div>
 
   @if (bookings.length === 0) {
     <p class="empty">You don't have any bookings yet</p>

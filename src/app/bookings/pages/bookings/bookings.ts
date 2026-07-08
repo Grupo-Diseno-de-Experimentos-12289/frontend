@@ -4,10 +4,12 @@ import { Booking, BookingService } from '../../services/booking.service';
 import { TripItemCard } from '../../../cart/components/trip-item-card/trip-item-card';
 import { MatIcon } from '@angular/material/icon';
 
+import { TranslateModule } from '@ngx-translate/core';
+
 @Component({
   selector: 'app-bookings',
   standalone: true,
-  imports: [CommonModule, TripItemCard, MatIcon],
+  imports: [CommonModule, TripItemCard, MatIcon, TranslateModule],
   templateUrl: './bookings.html',
   styleUrl: './bookings.scss'
 })

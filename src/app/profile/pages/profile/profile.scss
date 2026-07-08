@@ -1,20 +1,22 @@
 @use '../../../../styles/variables' as *;
 
 .profile-page {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 40px 20px;
   position: relative;
 }
 
 .success-banner {
-  background-color: $color-sand-yellow;
-  color: $color-navy-blue;
+  background-color: #D4EDDA;
+  color: #155724;
+  border: 1px solid #C3E6CB;
   font-family: $font-family-primary;
   font-weight: $font-weight-h2;
   padding: 16px 24px;
   border-radius: 12px;
   margin-bottom: 24px;
-  text-align: right;
+  text-align: left;
 }
 
 .profile-layout {
@@ -61,8 +63,10 @@
 
 .form-panel {
   h2 {
-    text-align: center;
+    text-align: left;
     margin: 0 0 16px 0;
+    font-family: $font-family-primary;
+    color: $color-navy-blue;
 
     &:not(:first-child) {
       margin-top: 32px;
@@ -82,7 +86,7 @@
     font-family: $font-family-primary;
     font-weight: $font-weight-h2;
     color: $color-navy-blue;
-    text-align: center;
+    text-align: left;
 
     input {
       border: 1px solid $color-navy-blue;
@@ -104,7 +108,7 @@
 
 .btn-save {
   display: block;
-  margin: 32px auto 0 auto;
+  margin: 32px 0 0 0;
   background-color: $color-sand-yellow;
   color: $color-navy-blue;
   border: none;

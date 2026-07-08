@@ -12,28 +12,14 @@ $color-active-bg: #EFF6FF;
 .recommendations-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2.5rem 1.5rem;
+  padding: 40px 20px;
   font-family: 'Inter', sans-serif;
   color: $color-navy-blue;
 }
 
 .page-header {
-  margin-bottom: 2.5rem;
+  margin-bottom: 32px;
   text-align: left;
-
-  h1 {
-    font-family: 'Nunito Sans', sans-serif;
-    font-size: 2.2rem;
-    font-weight: 800;
-    margin: 0 0 0.5rem 0;
-  }
-
-  .subtitle {
-    font-size: 1.1rem;
-    color: $color-dark-gray;
-    margin: 0;
-    line-height: 1.5;
-  }
 }
 
 .main-grid {
@@ -300,6 +286,39 @@ $color-active-bg: #EFF6FF;
       font-size: 0.9rem;
     }
   }
+
+  &.banner-gray {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background-color: #F1F5F9;
+    border: 1px solid #CBD5E1;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 1.5rem;
+
+    mat-icon {
+      color: #64748B;
+      font-size: 1.5rem;
+      width: 1.5rem;
+      height: 1.5rem;
+      margin-top: 2px;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      color: #334155;
+      font-family: 'Nunito Sans', sans-serif;
+      font-weight: 700;
+      margin: 0 0 4px 0;
+    }
+
+    p {
+      color: #475569;
+      font-size: 0.9rem;
+      margin: 0;
+    }
+  }
 }
 
 .no-results {
@@ -338,3 +357,32 @@ $color-active-bg: #EFF6FF;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1.5rem;
 }
+
+.setup-required-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background-color: $color-white;
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba($color-border, 0.4);
+
+  .setup-actions {
+    display: flex;
+    justify-content: flex-start;
+  }
+}
+
+.fallback-suggestions {
+  margin-top: 3rem;
+
+  .section-title {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: $color-navy-blue;
+  }
+}
+
