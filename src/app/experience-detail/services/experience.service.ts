@@ -11,6 +11,8 @@ export interface Experience {
   duration: string;
   meetingPoint: string;
   agencyId: number;
+  cancellationPolicyType?: string;
+  cancellationPolicyDescription?: string;
 }
 
 @Injectable({
@@ -25,9 +27,6 @@ export class ExperienceService {
     return this.http.get<Experience[]>(this.basePath);
   }
 
-  /**
-   * ⚠️ Workaround temporal hasta que exista GET /experiences/{id}
-   */
   getExperienceById(id: number): Observable<Experience> {
     return this.http.get<Experience[]>(this.basePath).pipe(
       map((experiences) => {
@@ -38,5 +37,24 @@ export class ExperienceService {
         return found;
       })
     );
+  }
+
+  getBookingInfo(experienceId: number): Observable<any> {
+    return this.http.get<any>(`${this.basePath}/${experienceId}/booking-info`);
+  }
+
+  getCorporateRecommendations(
+    destinationId: number,
+    interests: string[],
+    windowStart: string,
+    windowEnd: string
+  ): Observable<any[]> {
+    let params = `destinationId=${destinationId}&windowStart=${windowStart}&windowEnd=${windowEnd}`;
+    if (interests && interests.length > 0) {
+      interests.forEach(interest => {
+        params += `&interests=${encodeURIComponent(interest)}`;
+      });
+    }
+    return this.http.get<any[]>(`${this.basePath}/recommendations/corporate?${params}`);
   }
 }

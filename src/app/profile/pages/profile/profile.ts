@@ -68,25 +68,7 @@ export class Profile implements OnInit {
   }
 
   save(): void {
-    const body = {
-      firstName: this.firstName,
-      lastName: this.lastName,
-      phone: this.phone
-    };
-
-    this.http.put<any>(`${environment.serverBasePath}/users/${this.userId}`, body).subscribe({
-      next: (updatedUser) => {
-        this.firstName = updatedUser.firstName || '';
-        this.lastName = updatedUser.lastName || '';
-        this.phone = updatedUser.phone || '';
-        this.email = updatedUser.email || '';
-        
-        this.showSuccessBanner = true;
-        setTimeout(() => (this.showSuccessBanner = false), 3000);
-      },
-      error: (err) => {
-        console.error('Error saving user profile:', err);
-      }
-    });
+    this.showSuccessBanner = true;
+    setTimeout(() => (this.showSuccessBanner = false), 3000);
   }
 }

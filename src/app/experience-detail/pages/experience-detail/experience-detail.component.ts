@@ -65,6 +65,11 @@ export class ExperienceDetailComponent implements OnInit {
 
   suggestions: ExperienceCardData[] = [];
 
+  cancellationPolicyType = '';
+  cancellationPolicyDescription = '';
+  bookingInfoAvailabilities: any[] = [];
+  hasAvailabilities = true;
+
   private nextAvailability: Availability | null = null;
 
   constructor(
@@ -96,6 +101,18 @@ export class ExperienceDetailComponent implements OnInit {
       },
       error: () => {
         this.isLoading = false;
+      }
+    });
+
+    this.experienceService.getBookingInfo(this.experienceId).subscribe({
+      next: (info) => {
+        this.cancellationPolicyType = info.cancellationPolicyType || '';
+        this.cancellationPolicyDescription = info.cancellationPolicyDescription || '';
+        this.bookingInfoAvailabilities = info.availabilities || [];
+        this.hasAvailabilities = this.bookingInfoAvailabilities.length > 0 && this.bookingInfoAvailabilities.some(a => a.totalStock > 0);
+      },
+      error: (err) => {
+        console.error('Failed to load booking info:', err);
       }
     });
 

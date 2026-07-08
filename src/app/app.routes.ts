@@ -46,6 +46,11 @@ export const routes: Routes = [
         loadComponent: () => import('./profile/pages/profile/profile').then(m => m.Profile)
       },
       {
+        path: 'recommendations',
+        loadComponent: () =>
+          import('./recommendations/pages/recommendations/recommendations.component').then(m => m.RecommendationsComponent)
+      },
+      {
         path: 'checkout/success',
         loadComponent: () =>
           import('./checkout/pages/checkout-success/checkout-success').then(m => m.CheckoutSuccess)

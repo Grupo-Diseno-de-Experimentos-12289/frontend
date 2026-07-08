@@ -1,0 +1,136 @@
+<div class="recommendations-container">
+  <header class="page-header">
+    <h1>Corporate Travel Recommendations</h1>
+    <p class="subtitle">Optimize your business schedule: discover experiences that perfectly fit into your free time windows.</p>
+  </header>
+
+  <div class="main-grid">
+    <!-- Configuration Panel -->
+    <section class="agenda-card">
+      <div class="card-header-row">
+        <h2>Your Work Agenda</h2>
+        <button mat-button class="btn-reset" *ngIf="corporateProfileSet" (click)="resetAgenda()">
+          <mat-icon>restart_alt</mat-icon> Clear Agenda
+        </button>
+      </div>
+      <p class="section-desc">Define your location and business free time windows to get compatible suggestions.</p>
+
+      <div class="form-group">
+        <label for="destination">Business Location</label>
+        <div class="select-wrapper">
+          <mat-icon class="select-icon">place</mat-icon>
+          <select id="destination" [(ngModel)]="selectedDestinationId" [disabled]="corporateProfileSet">
+            <option *ngFor="let dest of destinations" [value]="dest.id">
+              {{ dest.city }}, {{ dest.country }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Interests / Categories</label>
+        <div class="categories-grid">
+          <button 
+            type="button" 
+            *ngFor="let cat of categories" 
+            class="category-btn"
+            [class.active]="selectedCategories[cat]"
+            [disabled]="corporateProfileSet"
+            (click)="toggleCategory(cat)"
+          >
+            {{ cat }}
+          </button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="start-time">Free Time Start</label>
+        <div class="input-wrapper">
+          <mat-icon class="input-icon">today</mat-icon>
+          <input 
+            type="datetime-local" 
+            id="start-time" 
+            [(ngModel)]="windowStart" 
+            [disabled]="corporateProfileSet"
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="end-time">Free Time End</label>
+        <div class="input-wrapper">
+          <mat-icon class="input-icon">event</mat-icon>
+          <input 
+            type="datetime-local" 
+            id="end-time" 
+            [(ngModel)]="windowEnd" 
+            [disabled]="corporateProfileSet"
+          />
+        </div>
+      </div>
+
+      <button 
+        *ngIf="!corporateProfileSet" 
+        class="btn-primary-cta" 
+        [disabled]="isLoading" 
+        (click)="applyCorporateAgenda()"
+      >
+        <mat-icon *ngIf="!isLoading">filter_alt</mat-icon>
+        <span *ngIf="!isLoading">Find Compatible Experiences</span>
+        <span *ngIf="isLoading">Filtering Schedule...</span>
+      </button>
+
+      <p class="error-msg" *ngIf="errorMessage">{{ errorMessage }}</p>
+    </section>
+
+    <!-- Results Panel -->
+    <section class="results-panel">
+      <!-- State 1: Loading -->
+      <div class="loading-state" *ngIf="isLoading">
+        <mat-icon class="spinner">sync</mat-icon>
+        <p>Analyzing schedule compatibilities...</p>
+      </div>
+
+      <!-- State 2: Personalized Corporate Recs -->
+      <ng-container *ngIf="!isLoading && corporateProfileSet">
+        <div class="results-header">
+          <h3>Compatible Experiences Found ({{ displayRecs.length }})</h3>
+          <p>The following experiences have open slots that fit entirely inside your business free time.</p>
+        </div>
+
+        <div class="no-results" *ngIf="displayRecs.length === 0">
+          <mat-icon class="no-results-icon">business_center</mat-icon>
+          <h4>No compatible experiences found</h4>
+          <p>We couldn't find experiences that fit this schedule and location. Try widening your free time window or selecting more categories.</p>
+        </div>
+
+        <div class="experiences-grid" *ngIf="displayRecs.length > 0">
+          <app-experience-card 
+            *ngFor="let card of displayRecs" 
+            [data]="card"
+            (favoriteToggle)="onFavoriteToggle($event)"
+          ></app-experience-card>
+        </div>
+      </ng-container>
+
+      <!-- State 3: General Recommendations (No profile configured yet) -->
+      <ng-container *ngIf="!isLoading && !corporateProfileSet">
+        <div class="results-header banner-blue">
+          <mat-icon>info</mat-icon>
+          <div>
+            <h3>Configure Your Business Agenda</h3>
+            <p>Define your location and time window on the left to see only schedule-compatible recommendations. Below are all popular experiences.</p>
+          </div>
+        </div>
+
+        <div class="experiences-grid">
+          <app-experience-card 
+            *ngFor="let card of generalExperiences" 
+            [data]="card"
+            (favoriteToggle)="onFavoriteToggle($event)"
+          ></app-experience-card>
+        </div>
+      </ng-container>
+    </section>
+  </div>
+</div>

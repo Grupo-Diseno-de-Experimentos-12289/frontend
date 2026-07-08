@@ -101,9 +101,16 @@
           <span class="price-value">S/. {{ display.priceFrom }}</span>
           <span class="price-unit">per person</span>
         </div>
-        <button class="btn-cta" (click)="toggleBookingCard()">Check availability</button>
+        <button class="btn-cta" [disabled]="!hasAvailabilities" [style.opacity]="hasAvailabilities ? 1 : 0.6" (click)="toggleBookingCard()">
+          {{ hasAvailabilities ? 'Check availability' : 'No availability' }}
+        </button>
       </div>
     </div>
+  </div>
+
+  <div class="no-availability-banner" *ngIf="!hasAvailabilities">
+    <mat-icon>warning</mat-icon>
+    <span><strong>No upcoming availability:</strong> There are no available slots with open seats at this time. Please see alternative suggestions below.</span>
   </div>
 
   <section class="reviews-section">
@@ -111,7 +118,7 @@
     <app-review-list [experienceId]="experienceId"></app-review-list>
   </section>
 
-  <section class="booking-selector">
+  <section class="booking-selector" *ngIf="hasAvailabilities">
     <div class="selector-field">
       <mat-icon>people</mat-icon>
       <input type="number" min="1" [(ngModel)]="adults" aria-label="Number of people" />
@@ -126,7 +133,7 @@
     </button>
   </section>
 
-  <section class="booking-card" *ngIf="showBookingCard">
+  <section class="booking-card" *ngIf="showBookingCard && hasAvailabilities">
     <h3>{{ experience.title }}</h3>
     <p class="meeting-point">
       <mat-icon>place</mat-icon>
@@ -141,7 +148,15 @@
       </div>
     </div>
 
-    <div class="booking-row" *ngIf="quote">
+    <div class="booking-row" *ngIf="cancellationPolicyDescription">
+      <mat-icon>gavel</mat-icon>
+      <div>
+        <strong>Cancellation Policy ({{ cancellationPolicyType }})</strong>
+        <p>{{ cancellationPolicyDescription }}</p>
+      </div>
+    </div>
+
+    <div class="booking-row" *ngIf="!cancellationPolicyDescription && quote">
       <mat-icon>event_available</mat-icon>
       <div>
         <strong>Cancellation Policy</strong>
@@ -149,7 +164,7 @@
       </div>
     </div>
 
-    <div class="booking-row" *ngIf="!quote && !quoteLoading">
+    <div class="booking-row" *ngIf="!cancellationPolicyDescription && !quote && !quoteLoading">
       <mat-icon>event_available</mat-icon>
       <p>Cancel in advance to receive a full refund</p>
     </div>
