@@ -1,0 +1,139 @@
+@use '../../../../styles/variables' as *;
+
+.experiences-page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.page-header {
+  margin-bottom: 36px;
+  text-align: left;
+
+  h1 {
+    font-family: $font-family-primary;
+    color: $color-navy-blue;
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+  }
+
+  p {
+    font-family: $font-family-secondary;
+    color: $color-soft-gray;
+    font-size: 15px;
+    margin: 0;
+  }
+}
+
+.experiences-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 28px;
+}
+
+.experience-card {
+  background-color: $color-white;
+  border: 1px solid rgba($color-soft-gray, 0.22);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  overflow: hidden;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba($color-navy-blue, 0.08);
+  }
+
+  .card-content {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .category-tag {
+    color: $color-navy-blue;
+    background-color: rgba($color-navy-blue, 0.06);
+    padding: 4px 10px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .duration-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: $color-soft-gray;
+
+    mat-icon {
+      font-size: 14px;
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  .experience-title {
+    font-family: $font-family-primary;
+    color: $color-navy-blue;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .experience-description {
+    font-family: $font-family-secondary;
+    color: $color-soft-gray;
+    font-size: 13.5px;
+    line-height: 1.5;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .card-footer {
+    padding: 16px 24px 24px 24px;
+    border-top: 1px solid rgba($color-soft-gray, 0.1);
+    background-color: rgba($color-light-beige, 0.15);
+  }
+
+  .btn-view-details {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: $color-navy-blue;
+    color: $color-white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-family: $font-family-primary;
+    font-size: 13px;
+    font-weight: 700;
+    transition: opacity 0.2s ease-in-out;
+
+    &:hover {
+      opacity: 0.9;
+    }
+
+    mat-icon {
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+    }
+  }
+}

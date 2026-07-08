@@ -1,10 +1,28 @@
-<div class="experience-list">
-  <h2>Experiences</h2>
-  <ul>
-    <li *ngFor="let experience of experiences">
-      <h3>{{ experience.name }}</h3>
-      <p>{{ experience.description }}</p>
-      <p>Price: {{ experience.price | currency }}</p>
-    </li>
-  </ul>
+<div class="experiences-page-container">
+  <header class="page-header">
+    <h1>All Experiences</h1>
+    <p>Discover unique and unforgettable guided tours, sports activities, and gastronomic tastings.</p>
+  </header>
+
+  <div class="experiences-grid">
+    <div class="experience-card" *ngFor="let experience of experiences">
+      <div class="card-content">
+        <div class="card-meta">
+          <span class="category-tag">{{ experience.category?.name || 'TOURIST' }}</span>
+          <span class="duration-tag" *ngIf="experience.duration">
+            <mat-icon>schedule</mat-icon>
+            {{ experience.duration }}
+          </span>
+        </div>
+        <h3 class="experience-title">{{ experience.title }}</h3>
+        <p class="experience-description">{{ experience.description }}</p>
+      </div>
+      <div class="card-footer">
+        <a [routerLink]="['/experience-detail', experience.id]" class="btn-view-details">
+          <span>View details</span>
+          <mat-icon>arrow_forward</mat-icon>
+        </a>
+      </div>
+    </div>
+  </div>
 </div>

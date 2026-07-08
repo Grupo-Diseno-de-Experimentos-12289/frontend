@@ -1,7 +1,10 @@
 export interface ExperienceResource {
   id: number;
-  name: string;
+  title: string;
   description: string;
-  price: number;
   agencyId: number;
+  category?: any;
+  destinationId?: number;
+  duration?: string;
+  meetingPoint?: string;
 }
