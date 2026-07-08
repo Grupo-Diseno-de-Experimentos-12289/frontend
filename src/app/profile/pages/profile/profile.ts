@@ -20,6 +20,7 @@ export class Profile implements OnInit {
   lastName = '';
   phone = '';
   email = '';
+  profileType = 'tourist';
   avatarUrl = 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80';
   showSuccessBanner = false;
 
@@ -44,9 +45,11 @@ export class Profile implements OnInit {
         this.lastName = user.lastName || '';
         this.phone = user.phone || '';
         this.email = user.email || '';
+        this.profileType = localStorage.getItem('profileType') || 'tourist';
       },
       error: (err) => {
         console.error('Error loading user profile:', err);
+        this.profileType = localStorage.getItem('profileType') || 'tourist';
       }
     });
   }
@@ -68,6 +71,11 @@ export class Profile implements OnInit {
   }
 
   save(): void {
+    localStorage.setItem('profileType', this.profileType);
+    localStorage.setItem('passengerName', `${this.firstName} ${this.lastName}`.trim());
+    localStorage.setItem('passengerEmail', this.email);
+    localStorage.setItem('passengerPhone', this.phone);
+
     this.showSuccessBanner = true;
     setTimeout(() => (this.showSuccessBanner = false), 3000);
   }

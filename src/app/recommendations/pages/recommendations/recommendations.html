@@ -1,10 +1,15 @@
 <div class="recommendations-container">
   <header class="page-header">
-    <h1>Corporate Travel Recommendations</h1>
-    <p class="subtitle">Optimize your business schedule: discover experiences that perfectly fit into your free time windows.</p>
+    <h1>{{ profileType === 'corporate' ? 'Business Travel Recommendations' : 'Personalized Recommendations' }}</h1>
+    <p class="subtitle">
+      {{ profileType === 'corporate' 
+         ? 'Optimize your business schedule: discover experiences that perfectly fit into your free time windows.' 
+         : 'Explore curated travel recommendations handpicked for your tourist preferences.' }}
+    </p>
   </header>
 
-  <div class="main-grid">
+  <!-- If Corporate, show 2-column layout (Agenda configuration + Results) -->
+  <div class="main-grid" *ngIf="profileType === 'corporate'">
     <!-- Configuration Panel -->
     <section class="agenda-card">
       <div class="card-header-row">
@@ -131,6 +136,32 @@
           ></app-experience-card>
         </div>
       </ng-container>
+    </section>
+  </div>
+
+  <!-- If Standard Tourist, show full-width curated layout -->
+  <div class="tourist-recommendations-layout" *ngIf="profileType !== 'corporate'">
+    <div class="results-header banner-blue">
+      <mat-icon>star</mat-icon>
+      <div>
+        <h3>Curated For Your Tourist Profile</h3>
+        <p>You are viewing popular and trending experiences matching your interests. Want to plan around a business schedule? Change your profile type to <strong>Corporate Traveler</strong> in your settings.</p>
+      </div>
+    </div>
+
+    <section class="results-panel">
+      <div class="loading-state" *ngIf="isLoading">
+        <mat-icon class="spinner">sync</mat-icon>
+        <p>Loading curated recommendations...</p>
+      </div>
+
+      <div class="experiences-grid" *ngIf="!isLoading">
+        <app-experience-card 
+          *ngFor="let card of generalExperiences" 
+          [data]="card"
+          (favoriteToggle)="onFavoriteToggle($event)"
+        ></app-experience-card>
+      </div>
     </section>
   </div>
 </div>

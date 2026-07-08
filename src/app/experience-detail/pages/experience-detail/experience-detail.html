@@ -110,7 +110,7 @@
 
   <div class="no-availability-banner" *ngIf="!hasAvailabilities">
     <mat-icon>warning</mat-icon>
-    <span><strong>No upcoming availability:</strong> There are no available slots with open seats at this time. Please see alternative suggestions below.</span>
+    <span><strong>No upcoming availability:</strong> There are currently no slots with open seats. See alternative suggestions below.</span>
   </div>
 
   <section class="reviews-section">
@@ -212,4 +212,114 @@
       ></app-experience-card>
     </div>
   </section>
+
+  <!-- Booking Confirmation Modal Overlay (US-04 & US-05) -->
+  <div class="booking-modal-overlay" *ngIf="showBookingModal">
+    <div class="booking-modal-container">
+      
+      <!-- State 1: Form and Terms check -->
+      <ng-container *ngIf="!bookingSuccess">
+        <header class="modal-header">
+          <h2>Passenger & Booking Details</h2>
+          <button class="close-modal-btn" (click)="closeBookingModal()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </header>
+        <p class="modal-intro">Please confirm your contact details and review terms of cancellation to complete your booking reservation.</p>
+
+        <div class="modal-form-grid">
+          <div class="modal-field">
+            <label for="passengerName">Full Name *</label>
+            <input type="text" id="passengerName" [(ngModel)]="passengerName" placeholder="John Doe" />
+          </div>
+
+          <div class="modal-field">
+            <label for="passengerEmail">Email Address *</label>
+            <input type="email" id="passengerEmail" [(ngModel)]="passengerEmail" placeholder="john.doe@example.com" />
+          </div>
+
+          <div class="modal-field">
+            <label for="passengerPhone">Contact Phone *</label>
+            <input type="tel" id="passengerPhone" [(ngModel)]="passengerPhone" placeholder="+1 555-0199" />
+          </div>
+
+          <div class="modal-field">
+            <label for="specialRequests">Special Requests / Comments</label>
+            <textarea id="specialRequests" [(ngModel)]="specialRequests" placeholder="E.g. dietary restrictions, pickup instructions..."></textarea>
+          </div>
+        </div>
+
+        <section class="modal-policy-card">
+          <h4>Cancellation Policy & Refund Terms ({{ cancellationPolicyType || 'STANDARD' }})</h4>
+          <p class="policy-desc">{{ cancellationPolicyDescription || 'Standard flexible cancellation terms apply to this tour.' }}</p>
+          <div class="policy-bullet-list">
+            <div class="policy-bullet">
+              <mat-icon class="bullet-icon">check_circle</mat-icon>
+              <span><strong>Full refund:</strong> Available up to 24 hours prior to the experience start date.</span>
+            </div>
+            <div class="policy-bullet">
+              <mat-icon class="bullet-icon">cancel</mat-icon>
+              <span><strong>Late cancel:</strong> No refund for cancellations within 24 hours of start time.</span>
+            </div>
+            <div class="policy-bullet">
+              <mat-icon class="bullet-icon">cloud</mat-icon>
+              <span><strong>Weather updates:</strong> Operators reserve the right to reschedule or issue refunds due to unsafe conditions.</span>
+            </div>
+          </div>
+        </section>
+
+        <div class="modal-terms-checkbox">
+          <input type="checkbox" id="acceptTerms" [(ngModel)]="acceptTerms" />
+          <label for="acceptTerms">I explicitly accept the Cancellation Policies, Refund Terms, and General Booking Conditions.</label>
+        </div>
+
+        <div class="modal-error-banner" *ngIf="bookingValidationError">
+          <mat-icon>error_outline</mat-icon>
+          <span>{{ bookingValidationError }}</span>
+        </div>
+
+        <footer class="modal-footer">
+          <button class="btn-cancel" (click)="closeBookingModal()">Cancel</button>
+          <button class="btn-confirm" (click)="confirmBooking()">Confirm Reservation</button>
+        </footer>
+      </ng-container>
+
+      <!-- State 2: Successful Booking Receipt -->
+      <ng-container *ngIf="bookingSuccess">
+        <div class="success-receipt-card">
+          <mat-icon class="success-check-icon">check_circle</mat-icon>
+          <h2>Booking Reserved Successfully!</h2>
+          <p class="receipt-sub">Your reservation for <strong>{{ experience.title }}</strong> has been registered. You can proceed to payment reviews.</p>
+
+          <div class="receipt-details">
+            <div class="receipt-row">
+              <span class="row-label">Traveler Name</span>
+              <span class="row-value">{{ passengerName }}</span>
+            </div>
+            <div class="receipt-row">
+              <span class="row-label">Email Address</span>
+              <span class="row-value">{{ passengerEmail }}</span>
+            </div>
+            <div class="receipt-row">
+              <span class="row-label">Phone</span>
+              <span class="row-value">{{ passengerPhone }}</span>
+            </div>
+            <div class="receipt-row" *ngIf="specialRequests">
+              <span class="row-label">Special Requests</span>
+              <span class="row-value">{{ specialRequests }}</span>
+            </div>
+            <div class="receipt-row border-top">
+              <span class="row-label">Total Price</span>
+              <span class="row-value highlight">S/. {{ totalPrice.toFixed(2) }}</span>
+            </div>
+          </div>
+
+          <footer class="modal-footer justify-center">
+            <button class="btn-pay-confirm" (click)="proceedToCheckout()">Proceed to Payment</button>
+          </footer>
+        </div>
+      </ng-container>
+
+    </div>
+  </div>
 </section>

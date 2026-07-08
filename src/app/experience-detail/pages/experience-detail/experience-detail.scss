@@ -202,6 +202,8 @@
   &.full {
     width: 100%;
   }
+}
+
 .no-availability-banner {
   display: flex;
   align-items: center;
@@ -637,3 +639,327 @@
     mat-icon { font-size: 18px; width: 18px; height: 18px; }
   }
 }
+
+// Booking Modal Styles (US-04 & US-05)
+.booking-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(28, 31, 43, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.booking-modal-container {
+  background-color: $color-white;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 650px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  padding: 32px;
+  box-sizing: border-box;
+  font-family: $font-family-secondary;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+
+  h2 {
+    font-family: $font-family-primary;
+    font-size: 22px;
+    font-weight: $font-weight-h2;
+    color: $color-navy-blue;
+    margin: 0;
+  }
+}
+
+.close-modal-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: $color-navy-blue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 50%;
+  
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+}
+
+.modal-intro {
+  font-size: 14px;
+  color: $color-navy-blue;
+  margin: 0 0 24px 0;
+  line-height: 1.5;
+}
+
+.modal-form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.modal-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  label {
+    font-weight: 600;
+    font-size: 13px;
+    color: $color-navy-blue;
+  }
+
+  input, textarea {
+    border: 1px solid $color-soft-gray;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 14px;
+    font-family: $font-family-secondary;
+    background-color: $color-white;
+    color: $color-navy-blue;
+
+    &:focus {
+      outline: none;
+      border-color: $color-navy-blue;
+    }
+  }
+
+  textarea {
+    min-height: 80px;
+    resize: vertical;
+  }
+}
+
+.modal-policy-card {
+  background-color: #F8FAFC;
+  border: 1px solid $color-soft-gray;
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 20px;
+
+  h4 {
+    font-family: $font-family-primary;
+    font-size: 14px;
+    font-weight: 700;
+    color: $color-navy-blue;
+    margin: 0 0 8px 0;
+  }
+
+  .policy-desc {
+    font-size: 13px;
+    color: $color-navy-blue;
+    line-height: 1.4;
+    margin: 0 0 14px 0;
+  }
+}
+
+.policy-bullet-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.policy-bullet {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 12px;
+  color: $color-navy-blue;
+  line-height: 1.4;
+
+  .bullet-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    color: #10B981;
+    margin-top: 1px;
+  }
+
+  mat-icon.bullet-icon {
+    &[class*="cancel"] {
+      color: #EF4444;
+    }
+    &[class*="cloud"] {
+      color: #3B82F6;
+    }
+  }
+}
+
+.modal-terms-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 20px;
+
+  input[type="checkbox"] {
+    margin-top: 3px;
+    cursor: pointer;
+  }
+
+  label {
+    font-size: 13px;
+    color: $color-navy-blue;
+    line-height: 1.4;
+    cursor: pointer;
+  }
+}
+
+.modal-error-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #FEF2F2;
+  color: #DC2626;
+  border: 1px solid #FEE2E2;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 20px;
+  font-size: 13px;
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+  border-top: 1px solid $color-soft-gray;
+  padding-top: 20px;
+
+  &.justify-center {
+    justify-content: center;
+  }
+}
+
+.btn-cancel {
+  background-color: transparent;
+  color: $color-navy-blue;
+  border: 1.5px solid $color-soft-gray;
+  border-radius: 50px;
+  padding: 10px 24px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #F8FAFC;
+    border-color: $color-navy-blue;
+  }
+}
+
+.btn-confirm, .btn-pay-confirm {
+  background-color: $color-navy-blue;
+  color: $color-white;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 28px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.success-receipt-card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .success-check-icon {
+    font-size: 56px;
+    width: 56px;
+    height: 56px;
+    color: #10B981;
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    font-family: $font-family-primary;
+    font-size: 24px;
+    color: $color-navy-blue;
+    margin: 0 0 8px 0;
+  }
+
+  .receipt-sub {
+    font-size: 14px;
+    color: $color-navy-blue;
+    margin: 0 0 24px 0;
+    max-width: 480px;
+    line-height: 1.5;
+  }
+}
+
+.receipt-details {
+  width: 100%;
+  background-color: #F8FAFC;
+  border: 1px solid $color-soft-gray;
+  border-radius: 12px;
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: left;
+  margin-bottom: 8px;
+}
+
+.receipt-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-size: 14px;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.05);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &.border-top {
+    border-top: 1px solid $color-soft-gray;
+    border-bottom: none;
+    margin-top: 8px;
+    padding-top: 14px;
+    padding-bottom: 0;
+  }
+
+  .row-label {
+    color: $color-navy-blue;
+    font-weight: 500;
+  }
+
+  .row-value {
+    color: $color-navy-blue;
+    font-weight: 600;
+    text-align: right;
+
+    &.highlight {
+      color: #10B981;
+      font-size: 18px;
+      font-weight: 800;
+    }
+  }
+}
+

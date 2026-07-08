@@ -70,6 +70,17 @@ export class ExperienceDetailComponent implements OnInit {
   bookingInfoAvailabilities: any[] = [];
   hasAvailabilities = true;
 
+  // Booking Modal States (US-04)
+  showBookingModal = false;
+  bookingSuccess = false;
+  passengerName = '';
+  passengerEmail = '';
+  passengerPhone = '';
+  specialRequests = '';
+  acceptTerms = false;
+  bookingValidationError = '';
+  confirmedItemId: any = null;
+
   private nextAvailability: Availability | null = null;
 
   constructor(
@@ -246,9 +257,49 @@ export class ExperienceDetailComponent implements OnInit {
   }
 
   reserveNow(): void {
-    this.cartService.add({ ...this.buildCartItem(), availabilityId: this.nextAvailability?.id }).subscribe((item) => {
-      this.router.navigate(['/checkout', item.id]).then();
+    // Pre-fill passenger details from localStorage (saved in profile)
+    this.passengerName = localStorage.getItem('passengerName') || '';
+    this.passengerEmail = localStorage.getItem('passengerEmail') || '';
+    this.passengerPhone = localStorage.getItem('passengerPhone') || '';
+    this.specialRequests = '';
+    this.acceptTerms = false;
+    this.bookingValidationError = '';
+    this.bookingSuccess = false;
+    this.showBookingModal = true;
+  }
+
+  confirmBooking(): void {
+    if (!this.passengerName.trim() || !this.passengerEmail.trim() || !this.passengerPhone.trim()) {
+      this.bookingValidationError = 'Please fill out all passenger details (Name, Email, and Phone).';
+      return;
+    }
+    if (!this.acceptTerms) {
+      this.bookingValidationError = 'You must accept the terms, conditions, and cancellation policies to proceed.';
+      return;
+    }
+
+    this.bookingValidationError = '';
+    this.cartService.add({ ...this.buildCartItem(), availabilityId: this.nextAvailability?.id }).subscribe({
+      next: (item) => {
+        this.confirmedItemId = item.id;
+        this.bookingSuccess = true;
+      },
+      error: (err) => {
+        console.error('Failed to complete booking:', err);
+        this.bookingValidationError = 'Failed to process booking. Please try again.';
+      }
     });
+  }
+
+  closeBookingModal(): void {
+    this.showBookingModal = false;
+  }
+
+  proceedToCheckout(): void {
+    this.showBookingModal = false;
+    if (this.confirmedItemId) {
+      this.router.navigate(['/checkout', this.confirmedItemId]).then();
+    }
   }
 
   onSuggestionFavoriteToggle(card: ExperienceCardData): void {

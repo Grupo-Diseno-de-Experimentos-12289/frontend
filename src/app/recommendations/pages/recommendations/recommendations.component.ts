@@ -30,6 +30,7 @@ export class RecommendationsComponent implements OnInit {
   corporateProfileSet = false;
   isLoading = false;
   errorMessage = '';
+  profileType = 'tourist';
 
   recommendations: any[] = [];
   displayRecs: ExperienceCardData[] = [];
@@ -42,10 +43,19 @@ export class RecommendationsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // 1. Fetch destinations
+    this.profileType = localStorage.getItem('profileType') || 'tourist';
+
+    // 1. Fetch destinations, deduplicating by city+country
     this.itineraryService.getDestinations().subscribe({
       next: (dests) => {
-        this.destinations = dests;
+        // Deduplicate by city+country so the dropdown shows clean options
+        const seen = new Set<string>();
+        this.destinations = dests.filter(dest => {
+          const key = `${dest.city}-${dest.country}`;
+          if (seen.has(key)) return false;
+          seen.add(key);
+          return true;
+        });
         if (this.destinations.length > 0) {
           this.selectedDestinationId = this.destinations[0].id;
         }
@@ -90,12 +100,15 @@ export class RecommendationsComponent implements OnInit {
     this.errorMessage = '';
     this.isLoading = true;
 
-    // Convert checkboxes to list of strings
     const interests = Object.keys(this.selectedCategories).filter(k => this.selectedCategories[k]);
 
-    // Convert local datetime-local value to backend-compatible ISO string
-    const startISO = new Date(this.windowStart).toISOString();
-    const endISO = new Date(this.windowEnd).toISOString();
+    // Backend expects LocalDateTime format: 2026-07-08T09:00:00 (no Z, no ms)
+    const toLocalDT = (isoStr: string) => {
+      const d = new Date(isoStr);
+      return d.toISOString().replace('Z', '').split('.')[0];
+    };
+    const startISO = toLocalDT(this.windowStart);
+    const endISO = toLocalDT(this.windowEnd);
 
     this.experienceService.getCorporateRecommendations(
       this.selectedDestinationId,

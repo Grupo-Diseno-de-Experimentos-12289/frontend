@@ -42,7 +42,18 @@
         </label>
       </div>
 
-      <button class="btn-save" (click)="save()">Save</button>
+      <h2>Traveler Preferences</h2>
+      <div class="form-row">
+        <label>
+          Profile Classification
+          <select [(ngModel)]="profileType" class="profile-type-select">
+            <option value="tourist">Standard Tourist</option>
+            <option value="corporate">Corporate Traveler</option>
+          </select>
+        </label>
+      </div>
+
+      <button class="btn-save" (click)="save()">Save changes</button>
     </div>
   </div>
 </div>
