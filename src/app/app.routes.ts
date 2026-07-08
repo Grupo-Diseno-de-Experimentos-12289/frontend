@@ -15,6 +15,10 @@ export const routes: Routes = [
         loadComponent: () => import('./public/pages/home/home').then(m => m.Home)
       },
       {
+        path: 'experiences',
+        loadComponent: () => import('./experiences/components/experience-list/experience-list.component').then(m => m.ExperienceListComponent)
+      },
+      {
         path: 'experience-detail/:id',
         loadComponent: () =>
           import('../app/experience-detail/pages/experience-detail/experience-detail.component')
