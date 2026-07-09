@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  serverBasePath: 'http://localhost:8091/api/v1'
+  serverBasePath: 'https://travelmatch-backend-f71j.onrender.com/api/v1'
 };
